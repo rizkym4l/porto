@@ -58,7 +58,7 @@ export const projects = [
     id: 2,
     name: "Task Management System Frontend",
     description:
-      "Frontend application for a task management system that helps teams organize tasks, track progress, and manage workflows efficiently. Features include authentication, task CRUD operations, dashboards, and state management for scalable usage.",
+      "(Email : admin@gmail.com Pw:admin123 | (developer@gmail.com Pw:dev123))Frontend application for a task management system that helps teams organize tasks, track progress, and manage workflows efficiently. Features include authentication, task CRUD operations, dashboards, and state management for scalable usage. ",
     techStack: [
       "React",
       "Node.js",
