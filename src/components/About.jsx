@@ -276,7 +276,7 @@ const About = () => {
               >
                 "
               </motion.span>
-              Fullstack Developer with 2+ years of remote experience building production systems for fintech,
+              Fullstack Developer with years of remote experience building production systems for fintech,
 healthcare, and SaaS platforms. Specialized in React, TypeScript, Laravel, and real-time web
 applications. Proven track record of delivering enterprise solutions independently while maintaining
 high code quality in Agile environments.
