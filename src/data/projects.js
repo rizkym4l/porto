@@ -9,13 +9,11 @@ const ymvcImages = [ymvc1, ymvc2, ymvc3, ymvc4, ymvc5];
 import utama from "../assets/finance/Pertama.png";
 import fnc1 from "../assets/finance/satu.png";
 import fnc2 from "../assets/finance/dua.png";
-import fnc3 from "../assets/finance/tiga.png";
-import fnc4 from "../assets/finance/empat.png";
 import fnc5 from "../assets/finance/lima.png";
 import fnc6 from "../assets/finance/enam.png";
 import fnc7 from "../assets/finance/tujuh.png";
 
-const fncImages = [utama, fnc1, fnc2, fnc3, fnc4, fnc5, fnc6, fnc7];
+const fncImages = [utama, fnc1, fnc2, fnc5, fnc6, fnc7];
 
 import tm1 from "../assets/TM/pertama.png";
 import tm2 from "../assets/TM/kedua.png";
