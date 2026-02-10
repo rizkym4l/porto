@@ -1,408 +1,154 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Code, Award, Briefcase, GraduationCap, Sparkles } from 'lucide-react';
-import { Card } from './ui/card';
-import { fadeInUp, staggerContainer } from '../animations/motionVariants';
+import { motion } from 'framer-motion';
+import { FiStar } from 'react-icons/fi';
+import { FaStar, FaStarHalfAlt, FaQuoteLeft } from 'react-icons/fa';
 
-const About = () => {
-  const { scrollYProgress } = useScroll();
-  
-  // Parallax effects
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 50]);
-  
-  const highlights = [
-    {
-      icon: <Code size={24} />,
-      title: "Coding Since 2022",
-      description: "Hands-on experience building real-world applications",
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: <Briefcase size={24} />,
-      title: "Remote Work Expert",
-      description: "Experienced with multiple companies and software houses",
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      icon: <Award size={24} />,
-      title: "Full-Stack Proficient",
-      description: "React, Node.js, Laravel, and modern tech stack",
-      color: "from-orange-500 to-red-500"
-    },
-    {
-      icon: <GraduationCap size={24} />,
-      title: "Continuous Learner",
-      description: "Pursuing Applied Bachelor in Smart City Systems",
-      color: "from-green-500 to-emerald-500"
+const reviews = [
+  {
+    name: 'Andi Pratama',
+    role: 'CEO, Fintools',
+    avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+    month: 'December 2025',
+    rating: 5,
+    text: 'Rizki delivered an outstanding finance platform. His React & TypeScript skills are top-notch. Very reliable and communicative throughout the project.',
+  },
+  {
+    name: 'Sarah Chen',
+    role: 'Product Manager',
+    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+    month: 'October 2025',
+    rating: 5,
+    text: 'Exceptional frontend work! The UI components he built were pixel-perfect and highly performant. Would definitely work with him again.',
+  },
+  {
+    name: 'Budi Santoso',
+    role: 'CTO, Jagoscript',
+    avatar: 'https://randomuser.me/api/portraits/men/75.jpg',
+    month: 'July 2025',
+    rating: 4.5,
+    text: 'Great collaboration on our Livewire platform. Rizki understands both design and functionality, delivering clean and responsive interfaces.',
+  },
+  {
+    name: 'Maria Lopez',
+    role: 'Project Lead',
+    avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
+    month: 'May 2025',
+    rating: 5,
+    text: 'Rizki transformed our complex requirements into an intuitive dashboard. His attention to detail and problem-solving skills are impressive.',
+  },
+  {
+    name: 'David Kim',
+    role: 'Startup Founder',
+    avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
+    month: 'March 2025',
+    rating: 4.5,
+    text: 'Fast delivery, clean code, and great communication. He built our MVP in record time with React and Node.js. Highly recommended!',
+  },
+  {
+    name: 'Putri Wulandari',
+    role: 'UI/UX Designer',
+    avatar: 'https://randomuser.me/api/portraits/women/26.jpg',
+    month: 'January 2025',
+    rating: 5,
+    text: 'Working with Rizki was a pleasure. He translated my designs into flawless code with smooth animations and perfect responsiveness.',
+  },
+];
+
+const StarRating = ({ rating }) => {
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+    if (i <= Math.floor(rating)) {
+      stars.push(<FaStar key={i} className="text-yellow-400" size={16} />);
+    } else if (i - 0.5 === rating) {
+      stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" size={16} />);
+    } else {
+      stars.push(<FiStar key={i} className="text-yellow-400" size={16} />);
     }
-  ];
+  }
+  return <div className="flex gap-0.5">{stars}</div>;
+};
 
-  // Floating particles
-  const particles = Array.from({ length: 8 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 3 + 1,
-    duration: Math.random() * 8 + 12,
-    delay: Math.random() * 3
-  }));
+const ReviewCard = ({ review }) => (
+  <div className="flex-shrink-0 w-[340px] md:w-[380px]">
+    <motion.div
+      className="relative p-6 rounded-2xl border border-gray-100 shadow-lg backdrop-blur-md bg-white/80 h-full"
+      whileHover={{ y: -5, scale: 1.02 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+    >
+      <FaQuoteLeft className="absolute top-4 right-4 text-gray-100" size={32} />
 
-  return (
-    <section id="about" className="py-20 bg-black relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 opacity-5">
-        <motion.div 
-          className="absolute inset-0" 
-          style={{
-            backgroundImage: `radial-gradient(circle at center, #404040 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}
-          animate={{
-            backgroundPosition: ['0px 0px', '50px 50px']
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
+      <div className="flex items-center gap-4 mb-4">
+        <motion.img
+          src={review.avatar}
+          alt={review.name}
+          className="w-14 h-14 rounded-full object-cover border-2 border-gray-100 shadow-sm"
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: 'spring', stiffness: 300 }}
         />
+        <div>
+          <h4 className="text-gray-800 font-semibold text-base">{review.name}</h4>
+          <p className="text-gray-400 text-sm">{review.role}</p>
+        </div>
       </div>
 
-      {/* Floating Particles */}
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full bg-white"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: particle.size,
-            height: particle.size,
-          }}
-          animate={{
-            y: [0, -80, 0],
-            opacity: [0, 0.4, 0],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
+      <div className="flex items-center gap-3 mb-3">
+        <StarRating rating={review.rating} />
+        <span className="text-gray-400 text-xs">{review.month}</span>
+      </div>
 
-      {/* Gradient Orbs */}
-      <motion.div 
-        className="absolute top-20 right-20 w-64 h-64 bg-blue-900 rounded-full blur-3xl opacity-10"
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.1, 0.2, 0.1],
-        }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div 
-        className="absolute bottom-20 left-20 w-72 h-72 bg-purple-900 rounded-full blur-3xl opacity-10"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.1, 0.15, 0.1],
-        }}
-        transition={{
-          duration: 11,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
+      <p className="text-gray-600 text-sm leading-relaxed">{review.text}</p>
+    </motion.div>
+  </div>
+);
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16 relative"
+const About = () => {
+  // Duplicate reviews for seamless infinite scroll
+  const duplicated = [...reviews, ...reviews];
+
+  return (
+    <section id="about" className="py-20 bg-white relative overflow-hidden">
+      {/* Section Title */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-14 px-6"
+      >
+        <motion.h2
+          className="text-gray-800 text-3xl md:text-5xl font-extrabold tracking-wide mb-3"
+          animate={{ opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <motion.div
-            className="absolute -top-4 left-1/2 transform -translate-x-1/2"
-            animate={{
-              y: [0, -10, 0],
-              rotate: [0, 10, -10, 0]
-            }}
-            transition={{
-              duration: 4,
+          Client Reviews
+        </motion.h2>
+        <p className="text-gray-400 text-base md:text-lg max-w-md mx-auto">
+          What people say about working with me
+        </p>
+      </motion.div>
+
+      {/* Marquee Row */}
+      <div className="relative">
+        {/* Left fade */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
+        {/* Right fade */}
+        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
+
+        <motion.div
+          className="flex gap-6 py-4"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{
+            x: {
+              duration: 30,
               repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <Sparkles className="text-gray-700" size={24} />
-          </motion.div>
-          
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white relative inline-block">
-            About Me
-            <motion.div
-              className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl -z-10"
-              animate={{
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </h2>
-          <motion.div 
-            className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"
-            animate={{
-              scaleX: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
+              ease: 'linear',
+            },
+          }}
+        >
+          {duplicated.map((review, i) => (
+            <ReviewCard key={`${review.name}-${i}`} review={review} />
+          ))}
         </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Image with Parallax */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            style={{ y: imageY }}
-            className="order-2 md:order-1"
-          >
-            <motion.div 
-              className="relative rounded-lg overflow-hidden group"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* Animated Border */}
-              <motion.div
-                className="absolute inset-0 rounded-lg"
-                animate={{
-                  background: [
-                    'linear-gradient(45deg, transparent, transparent)',
-                    'linear-gradient(45deg, rgba(59, 130, 246, 0.5), rgba(168, 85, 247, 0.5))',
-                    'linear-gradient(45deg, transparent, transparent)',
-                  ],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                style={{ padding: '2px' }}
-              >
-                <div className="w-full h-full bg-black rounded-lg" />
-              </motion.div>
-
-              {/* Image */}
-              <div className="relative z-10">
-                <motion.img
-                  src="https://media.licdn.com/dms/image/v2/D5603AQHkk942CR0lSg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1703894450545?e=2147483647&v=beta&t=EXyOXl1_MrdfvfZ8y4YOfdgE5ykSdgD8-j4qo068c_E"
-                  alt="Developer workspace"
-                  className="w-full h-auto grayscale group-hover:grayscale-0 transition-all duration-500 relative z-10"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                
-                {/* Floating Glow Effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
-                />
-              </div>
-
-              {/* Corner Accents */}
-              <motion.div
-                className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-blue-500"
-                animate={{
-                  opacity: [0.3, 0.7, 0.3],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              <motion.div
-                className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-purple-500"
-                animate={{
-                  opacity: [0.3, 0.7, 0.3],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1
-                }}
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Content with Parallax */}
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            style={{ y: contentY }}
-            className="order-1 md:order-2"
-          >
-            <motion.p
-              variants={fadeInUp}
-              className="text-gray-300 text-lg mb-8 leading-relaxed relative"
-            >
-              <motion.span
-                className="absolute -left-4 top-0 text-6xl text-blue-500/20 font-serif"
-                animate={{
-                  opacity: [0.1, 0.3, 0.1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                "
-              </motion.span>
-              Fullstack Developer with Over 1 year  of remote experience building production systems for fintech,
-healthcare, and SaaS platforms. Specialized in React, TypeScript, Laravel, and real-time web
-applications. Proven track record of delivering enterprise solutions independently while maintaining
-high code quality in Agile environments.
-            </motion.p>
-
-            <motion.p
-              variants={fadeInUp}
-              className="text-gray-400 text-base mb-8 leading-relaxed"
-            >
-              Passionate about contributing to innovative tech projects and providing efficient, scalable full-stack solutions. Strong in React, Node.js, Laravel, and modern frontend technologies.
-            </motion.p>
-
-            {/* Highlight Cards with Enhanced Animations */}
-            <motion.div
-              variants={staggerContainer}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-            >
-              {highlights.map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  whileHover={{ 
-                    scale: 1.05,
-                    y: -5,
-                  }}
-                  transition={{ 
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20
-                  }}
-                >
-                  <Card className="p-4 bg-gray-900 border-gray-800 hover:border-gray-600 transition-all duration-300 relative overflow-hidden group">
-                    {/* Animated Gradient Background */}
-                    <motion.div
-                      className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10`}
-                      transition={{ duration: 0.3 }}
-                    />
-                    
-                    {/* Shimmer Effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                      animate={{
-                        x: ['-100%', '100%'],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: index * 0.5
-                      }}
-                    />
-
-                    {/* Content */}
-                    <motion.div 
-                      className="text-white mb-2 relative z-10"
-                      animate={{
-                        rotate: [0, -5, 5, 0],
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.2
-                      }}
-                    >
-                      {item.icon}
-                    </motion.div>
-                    <h3 className="text-white font-semibold mb-1 relative z-10">{item.title}</h3>
-                    <p className="text-gray-400 text-sm relative z-10">{item.description}</p>
-
-                    {/* Corner Glow */}
-                    <motion.div
-                      className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-white/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100"
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* Decorative Elements */}
-            <motion.div
-              className="mt-8 flex items-center gap-4"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-            >
-              <motion.div
-                className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"
-                animate={{
-                  opacity: [0.3, 0.7, 0.3],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              <motion.div
-                animate={{
-                  rotate: 360,
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              >
-                <Code className="text-gray-700" size={20} />
-              </motion.div>
-              <motion.div
-                className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"
-                animate={{
-                  opacity: [0.3, 0.7, 0.3],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1.5
-                }}
-              />
-            </motion.div>
-          </motion.div>
-        </div>
       </div>
     </section>
   );

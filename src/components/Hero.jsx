@@ -1,518 +1,389 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Download, Github, Linkedin, Mail, Terminal, Code2, Cpu, Zap } from 'lucide-react';
-import { Button } from './ui/button';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  FaReact,
+  FaVuejs,
+  FaNodeJs,
+  FaLaravel,
+  FaGitAlt,
+  FaStar,
+  FaStarHalfAlt,
+  FaQuoteLeft,
+} from "react-icons/fa";
+import {
+  SiTypescript,
+  SiJavascript,
+  SiTailwindcss,
+  SiMysql,
+  SiPostgresql,
+  SiExpress,
+  SiRedux,
+  SiMongodb,
+  SiGo,
+  SiDocker,
+  SiFirebase,
+  SiNextdotjs,
+  SiNestjs,
+  SiPrisma,
+  SiVercel,
+} from "react-icons/si";
+import { FiGithub, FiInstagram, FiLinkedin, FiStar } from "react-icons/fi";
+import foto from "../assets/me/aku.jpeg";
+const reviews = [
+  {
+    name: "Baddarudin ",
+    role: "Senior Developer,Fintools",
+    avatar: "https://media.licdn.com/dms/image/v2/D5603AQGSVCoY1DtI6Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731332122318?e=1772064000&v=beta&t=vwJH2OB7iXsDSj5O8NTaErEFvXCGUF11vd6dOd13AQ0",
+    month: "Feb 2026",
+    rating: 5,
+    text: "Rizki delivered an outstanding finance platform. His React & TypeScript skills are top-notch.",
+  },
+  {
+    name: "Kesa Purnama",
+    role: "Mid Developer,Pt 4Net Prima",
+    avatar: "https://media.licdn.com/dms/image/v2/D4D03AQHXWUu5Mmzt_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1698918123764?e=1772064000&v=beta&t=C_qn_CVCfsMFZrWvLyX0EcHccfkzu4aykaozFJJFvHY",
+    month: "Jan 2025",
+    rating: 5,
+    text: "During the contract period, you showed a good attitude, learned quickly, and adapted well to the work environment. Moving forward, continue to build confidence and take initiative to maximize your contribution.",
+  },
+  {
+    name: "Rizky Bachtiar",
+    role: "Client, UNSIA",
+    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2ywDEoTHS-CjhkNudZLMd9pQgo07e1hJopA&s",
+    month: "Jul 2025",
+    rating: 5,
+    text: "The task was completed correctly and met all the requirements. The C++ implementation is clear, well-structured, and functions as expected. Overall, the result demonstrates a solid understanding of the problem and its solution. ",
+  },
+  {
+    name: "Maria Lopez",
+    role: "Project Lead",
+    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    month: "May 2025",
+    rating: 5,
+    text: "Rizki transformed complex requirements into an intuitive dashboard. Impressive attention to detail.",
+  },
+  {
+    name: "David Kim",
+    role: "Startup Founder",
+    avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+    month: "Mar 2025",
+    rating: 4.5,
+    text: "Fast delivery, clean code, and great communication. Built our MVP in record time.",
+  },
+  {
+    name: "Putri Wulandari",
+    role: "UI/UX Designer",
+    avatar: "https://randomuser.me/api/portraits/women/26.jpg",
+    month: "Jan 2025",
+    rating: 5,
+    text: "He translated my designs into flawless code with smooth animations and perfect responsiveness.",
+  },
+];
 
-const Hero = () => {
-  const [text, setText] = useState('');
-  const fullText = '> Building scalable web applications...';
-  
-  // Scroll animations
-  const { scrollY } = useScroll();
-  
-  // Parallax effects untuk nama
-  const nameY = useTransform(scrollY, [0, 500], [0, 150]);
-  const nameOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const nameScale = useTransform(scrollY, [0, 300], [1, 0.8]);
-  
-  // Parallax untuk "Rizki" dan "Maulana Arif" bergerak terpisah
-  const rizkiX = useTransform(scrollY, [0, 500], [0, -100]);
-  const maulanaX = useTransform(scrollY, [0, 500], [0, 100]);
-  
-  // Parallax untuk elemen lain
-  const roleY = useTransform(scrollY, [0, 500], [0, 80]);
-  const descY = useTransform(scrollY, [0, 500], [0, 120]);
-  const buttonY = useTransform(scrollY, [0, 500], [0, 160]);
-  const terminalY = useTransform(scrollY, [0, 500], [0, -100]);
-  const terminalRotate = useTransform(scrollY, [0, 500], [0, -5]);
-
-  useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setText(fullText.slice(0, index));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 50);
-    return () => clearInterval(timer);
-  }, []);
-
-  const scrollToSection = (section) => {
-    const element = document.getElementById(section);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+const StarRating = ({ rating }) => {
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+    if (i <= Math.floor(rating)) {
+      stars.push(<FaStar key={i} className="text-yellow-400" size={12} />);
+    } else if (i - 0.5 === rating) {
+      stars.push(
+        <FaStarHalfAlt key={i} className="text-yellow-400" size={12} />,
+      );
+    } else {
+      stars.push(<FiStar key={i} className="text-yellow-400" size={12} />);
     }
-  };
+  }
+  return <div className="flex gap-0.5">{stars}</div>;
+};
 
-  const handleDownloadCV = () => {
-    window.open('https://customer-assets.emergentagent.com/job_b91f9d24-a7ec-4b28-9c39-f55319314da0/artifacts/8t4rxto9_Rizki_Maulana_Arif_CV_2026.pdf', '_blank');
-  };
+const ReviewCard = ({ review }) => (
+  <div className="flex-shrink-0 w-[280px]">
+    <div className="relative p-4 rounded-2xl border border-gray-100 bg-white/90 h-full">
+      <FaQuoteLeft className="absolute top-3 right-3 text-gray-100" size={24} />
 
-  const codeLines = [
-    'const developer = {',
-    '  name: "Rizki Maulana Arif",',
-    '  role: "Fullstack Developer",',
-    '  experience: "2022 - Present",',
-    '  location: "Indonesia",',
-    '  remote: true,',
-    '  skills: ["React", "Node.js", "Laravel"]',
-    '};'
-  ];
-
-  // Floating particles data
-  const particles = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 2,
-    duration: Math.random() * 10 + 15,
-    delay: Math.random() * 5
-  }));
-
-  return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 opacity-5">
-        <motion.div 
-          className="absolute inset-0" 
-          style={{
-            backgroundImage: `linear-gradient(to right, #404040 1px, transparent 1px), linear-gradient(to bottom, #404040 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
-          }}
-          animate={{
-            backgroundPosition: ['0px 0px', '40px 40px']
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
+      <div className="flex items-center gap-3 mb-3">
+        <img
+          src={review.avatar}
+          alt={review.name}
+          className="w-10 h-10 rounded-full object-cover border-2 border-gray-100 shadow-sm"
         />
+        <div>
+          <h4 className="text-gray-800 font-semibold text-sm">{review.name}</h4>
+          <p className="text-gray-400 text-xs">{review.role}</p>
+        </div>
       </div>
 
-      {/* Floating Particles */}
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full bg-white"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: particle.size,
-            height: particle.size,
-          }}
-          animate={{
-            y: [0, -100, 0],
-            opacity: [0, 0.6, 0],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
+      <div className="flex items-center gap-2 mb-2">
+        <StarRating rating={review.rating} />
+        <span className="text-gray-400 text-xs">{review.month}</span>
+      </div>
 
-      {/* Animated Gradient Orbs */}
-      <motion.div 
-        className="absolute top-1/4 right-10 w-72 h-72 bg-purple-900 rounded-full blur-3xl opacity-20"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.3, 0.2],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div 
-        className="absolute bottom-1/4 left-10 w-96 h-96 bg-blue-900 rounded-full blur-3xl opacity-10"
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.1, 0.2, 0.1],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
+      <p className="text-gray-500 text-xs leading-relaxed">{review.text}</p>
+    </div>
+  </div>
+);
 
-      {/* Floating Tech Icons */}
-      <motion.div
-        className="absolute top-20 left-20 text-gray-800"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 10, 0]
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        <Code2 size={40} />
-      </motion.div>
-      <motion.div
-        className="absolute bottom-32 right-32 text-gray-800"
-        animate={{
-          y: [0, 20, 0],
-          rotate: [0, -10, 0]
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      >
-        <Cpu size={35} />
-      </motion.div>
-      <motion.div
-        className="absolute top-1/3 right-20 text-gray-800"
-        animate={{
-          y: [0, -15, 0],
-          rotate: [0, 15, 0]
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      >
-        <Zap size={30} />
-      </motion.div>
+const Hero = () => {
+  const techLogos = [
+    {
+      name: "React",
+      icon: FaReact,
+      color: "#61DAFB",
+      x: "18%",
+      y: "15%",
+      delay: 0,
+    },
+    {
+      name: "Vue.js",
+      icon: FaVuejs,
+      color: "#4FC08D",
+      x: "75%",
+      y: "12%",
+      delay: 0.3,
+    },
+    {
+      name: "TypeScript",
+      icon: SiTypescript,
+      color: "#3178C6",
+      x: "12%",
+      y: "42%",
+      delay: 0.6,
+    },
+    {
+      name: "JavaScript",
+      icon: SiJavascript,
+      color: "#F7DF1E",
+      x: "82%",
+      y: "35%",
+      delay: 0.9,
+    },
+    {
+      name: "Tailwind",
+      icon: SiTailwindcss,
+      color: "#06B6D4",
+      x: "25%",
+      y: "28%",
+      delay: 0.7,
+    },
+    {
+      name: "MySQL",
+      icon: SiMysql,
+      color: "#4479A1",
+      x: "70%",
+      y: "25%",
+      delay: 1.0,
+    },
+    {
+      name: "PostgreSQL",
+      icon: SiPostgresql,
+      color: "#336791",
+      x: "10%",
+      y: "55%",
+      delay: 0.5,
+    },
+    {
+      name: "Express",
+      icon: SiExpress,
+      color: "#444444",
+      x: "85%",
+      y: "48%",
+      delay: 0.8,
+    },
+    {
+      name: "Redux",
+      icon: SiRedux,
+      color: "#764ABC",
+      x: "28%",
+      y: "10%",
+      delay: 1.1,
+    },
+    {
+      name: "Go",
+      icon: SiGo,
+      color: "#00ADD8",
+      x: "88%",
+      y: "18%",
+      delay: 0.65,
+    },
+    {
+      name: "Nest.Js",
+      icon: SiNestjs,
+      color: "red",
+      x: "22%",
+      y: "52%",
+      delay: 0.95,
+    },
+    {
+      name: "Next.js",
+      icon: SiNextdotjs,
+      color: "#000000",
+      x: "6%",
+      y: "28%",
+      delay: 0.55,
+    },
+    {
+      name: "Vercel",
+      icon: SiVercel,
+      color: "#000000",
+      x: "68%",
+      y: "10%",
+      delay: 0.45,
+    },
+  ];
 
-      <div className="max-w-7xl mx-auto px-6 py-20 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Terminal/Code Style */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            style={{ 
-              y: terminalY,
-              rotateZ: terminalRotate
-            }}
-            className="order-2 lg:order-1"
-          >
-            {/* Terminal Window with Animated Glow */}
-            <motion.div 
-              className="bg-gray-900 border rounded-lg overflow-hidden shadow-2xl relative"
-              animate={{
-                borderColor: ['rgba(75, 85, 99, 1)', 'rgba(139, 92, 246, 0.5)', 'rgba(75, 85, 99, 1)']
-              }}
+  const duplicatedReviews = [...reviews, ...reviews];
+
+  return (
+    <>
+      <section className="h-[85vh] relative overflow-hidden bg-white">
+        {/* ===== FLOATING TECH ICONS ===== */}
+        {techLogos.map((tech, i) => {
+          const Icon = tech.icon;
+          return (
+            <motion.div
+              key={tech.name}
+              className="absolute z-10 hidden md:flex mt-24 items-center justify-center"
+              style={{ left: tech.x, top: tech.y }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
+                delay: 0.6 + tech.delay,
+                type: "spring",
+                stiffness: 200,
+                damping: 15,
               }}
             >
-              {/* Glowing effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-purple-500/10 rounded-lg"
                 animate={{
-                  opacity: [0.3, 0.6, 0.3]
+                  y: [0, -14, 0],
+                  rotate: [0, 3, -3, 0],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 4 + i * 0.3,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: "easeInOut",
+                  delay: tech.delay,
                 }}
-              />
-
-              {/* Terminal Header */}
-              <div className="bg-gray-800 px-4 py-3 flex items-center gap-2 border-b border-gray-700 relative z-10">
-                <div className="flex gap-2">
-                  <motion.div 
-                    className="w-3 h-3 rounded-full bg-red-500"
-                    animate={{ opacity: [1, 0.5, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  <motion.div 
-                    className="w-3 h-3 rounded-full bg-yellow-500"
-                    animate={{ opacity: [1, 0.5, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
-                  />
-                  <motion.div 
-                    className="w-3 h-3 rounded-full bg-green-500"
-                    animate={{ opacity: [1, 0.5, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
-                  />
-                </div>
-                <div className="flex items-center gap-2 ml-4 text-gray-400 text-sm">
-                  <Terminal size={14} />
-                  <span className="font-mono">developer.js</span>
-                </div>
-              </div>
-
-              {/* Terminal Content */}
-              <div className="p-6 font-mono text-sm relative z-10">
-                {codeLines.map((line, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="mb-1"
-                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                  >
-                    <span className="text-gray-500 mr-4">{index + 1}</span>
-                    <span className={
-                      line.includes('const') || line.includes('true') ? 'text-purple-400' :
-                      line.includes(':') && !line.includes('//') ? 'text-blue-400' :
-                      line.includes('"') ? 'text-green-400' :
-                      'text-gray-300'
-                    }>
-                      {line}
-                    </span>
-                  </motion.div>
-                ))}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 }}
-                  className="mt-4 text-gray-400"
-                >
-                  {text}<motion.span
-                    animate={{ opacity: [1, 0, 1] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  >_</motion.span>
-                </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Side - Profile Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="order-1 lg:order-2 text-left"
-          >
-            {/* Profile Badge with Pulse */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-full px-4 py-2 mb-6 relative overflow-hidden"
-            >
-              <motion.div
-                className="absolute inset-0 bg-green-500/10"
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.5, 0, 0.5]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeOut"
-                }}
-              />
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse relative z-10" />
-              <span className="text-gray-400 text-sm font-mono relative z-10">Available for work</span>
-            </motion.div>
-
-            {/* Nama dengan Parallax Scroll Effect */}
-            <motion.div
-              style={{ 
-                y: nameY,
-                opacity: nameOpacity,
-                scale: nameScale
-              }}
-            >
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="text-6xl md:text-7xl font-bold mb-4 leading-tight overflow-hidden"
               >
-                {/* "Rizki" bergerak ke kiri saat scroll */}
-                <motion.span
-                  style={{ 
-                    x: rizkiX,
-                    display: 'inline-block'
-                  }}
+                <motion.div
+                  className="relative p-4 rounded-2xl border border-gray-100 shadow-lg backdrop-blur-md"
                   animate={{
-                    textShadow: [
-                      '0 0 20px rgba(255,255,255,0)',
-                      '0 0 20px rgba(255,255,255,0.3)',
-                      '0 0 20px rgba(255,255,255,0)'
-                    ]
+                    backgroundColor: [
+                      "rgba(255,255,255,0.6)",
+                      "rgba(255,255,255,0.9)",
+                      "rgba(255,255,255,0.6)",
+                    ],
+                    boxShadow: [
+                      `0 4px 20px ${tech.color}15`,
+                      `0 8px 30px ${tech.color}30`,
+                      `0 4px 20px ${tech.color}15`,
+                    ],
                   }}
                   transition={{
-                    textShadow: {
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: tech.delay * 0.5,
                   }}
-                  className="text-white"
                 >
-                  Rizki
-                </motion.span>
-                <br />
-                {/* "Maulana Arif" bergerak ke kanan saat scroll */}
-                <motion.span 
-                  style={{ 
-                    x: maulanaX,
-                    display: 'inline-block'
-                  }}
-                  className="text-gray-400"
-                >
-                  Maulana Arif
-                </motion.span>
-              </motion.h1>
-            </motion.div>
-
-            {/* Role dengan parallax */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              style={{ y: roleY }}
-              className="mb-6"
-            >
-              <motion.div 
-                className="inline-block border-l-4 pl-4"
-                animate={{
-                  borderColor: ['rgba(255,255,255,1)', 'rgba(139,92,246,1)', 'rgba(255,255,255,1)']
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <p className="text-xl text-gray-300 font-medium">Fullstack Developer</p>
-                <p className="text-gray-500 text-sm mt-1">React • Node.js • Laravel</p>
+                  <Icon size={32} color={tech.color} />
+                </motion.div>
               </motion.div>
             </motion.div>
+          );
+        })}
 
-            {/* Description dengan parallax */}
+        {/* ===== CENTER CHARACTER / PHOTO ===== */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[15] flex flex-col items-center">
+          {/* "Software Developer" text + Social icons above photo */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-col items-center -mb-6 z-20"
+          >
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              style={{ y: descY }}
-              className="text-lg text-gray-400 mb-8 max-w-lg leading-relaxed"
+              className="text-gray-800 xl:text-3xl   text-xl md:text-2xl  font-extrabold tracking-wide  mb-2"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              Passionate about building efficient, scalable solutions.years of experience in remote development with focus on modern web technologies.
+              Hi,I am a Software Developer
             </motion.p>
-
-            {/* Buttons dengan parallax */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              style={{ y: buttonY }}
-              className="flex flex-wrap gap-4 mb-8"
-            >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  onClick={() => scrollToSection('projects')}
-                  className="bg-white text-black hover:bg-gray-200 px-8 py-6 text-base font-medium group relative overflow-hidden"
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400"
-                    initial={{ x: '-100%', opacity: 0 }}
-                    whileHover={{ x: 0, opacity: 0.2 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <span className="relative z-10 flex items-center">
-                    View Projects
-                    <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-                  </span>
-                </Button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  onClick={handleDownloadCV}
-                  variant="outline"
-                  className="border-gray-700 text-white hover:bg-gray-900 px-8 py-6 text-base font-medium"
-                >
-                  <Download className="mr-2" size={20} />
-                  Download CV
-                </Button>
-              </motion.div>
-            </motion.div>
-
-            {/* Social Links with Hover Effects */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="flex gap-4"
-            >
+            <div className="flex gap-4">
               <motion.a
                 href="https://github.com/rizkym4l"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 flex items-center justify-center bg-gray-900 border border-gray-800 rounded-lg text-gray-400 hover:text-white hover:border-gray-600 transition-all relative group"
+                whileHover={{ scale: 1.2, y: -3 }}
+                whileTap={{ scale: 0.9 }}
+                className="w-11 h-11 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-all shadow-sm"
               >
-                <motion.div
-                  className="absolute inset-0 bg-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                  }}
-                />
-                <Github size={20} className="relative z-10" />
+                <FiGithub size={20} />
+              </motion.a>
+              <motion.a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, y: -3 }}
+                whileTap={{ scale: 0.9 }}
+                className="w-11 h-11 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-500 hover:text-pink-500 hover:border-pink-300 transition-all shadow-sm"
+              >
+                <FiInstagram size={20} />
               </motion.a>
               <motion.a
                 href="https://www.linkedin.com/in/rizki-maulana-arif-b711521a7/"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 flex items-center justify-center bg-gray-900 border border-gray-800 rounded-lg text-gray-400 hover:text-white hover:border-gray-600 transition-all relative group"
+                whileHover={{ scale: 1.2, y: -3 }}
+                whileTap={{ scale: 0.9 }}
+                className="w-11 h-11 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-500 hover:text-blue-600 hover:border-blue-300 transition-all shadow-sm"
               >
-                <motion.div
-                  className="absolute inset-0 bg-blue-500/20 rounded-lg opacity-0 group-hover:opacity-100"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                  }}
-                />
-                <Linkedin size={20} className="relative z-10" />
+                <FiLinkedin size={20} />
               </motion.a>
-              <motion.a
-                href="mailto:Rizkymaulana.more@gmail.com"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 flex items-center justify-center bg-gray-900 border border-gray-800 rounded-lg text-gray-400 hover:text-white hover:border-gray-600 transition-all relative group"
-              >
-                <motion.div
-                  className="absolute inset-0 bg-green-500/20 rounded-lg opacity-0 group-hover:opacity-100"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                  }}
-                />
-                <Mail size={20} className="relative z-10" />
-              </motion.a>
-            </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Photo */}
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+            className="relative w-screen md:w-80 lg:w-[28rem]"
+            style={{ height: "65vh", maxHeight: "600px" }}
+          >
+            <img
+              src={foto}
+              alt="Rizki Maulana Arif"
+              className="w-full h-full object-cover object-top"
+              style={{
+                maskImage:
+                  "linear-gradient(to bottom, black 55%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 55%, transparent 100%)",
+              }}
+            />
           </motion.div>
         </div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 z-[16] pointer-events-none bg-gradient-to-t from-white to-transparent" />
+      </section>
+
+      {/* ===== REVIEW MARQUEE (below hero) ===== */}
+      <div className="bg-white py-8 overflow-hidden relative">
+        <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
+        <motion.div
+          className="flex gap-5"
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{ x: { duration: 40, repeat: Infinity, ease: "linear" } }}
+        >
+          {duplicatedReviews.map((review, i) => (
+            <ReviewCard key={`${review.name}-${i}`} review={review} />
+          ))}
+        </motion.div>
       </div>
-    </section>
+    </>
   );
 };
 
