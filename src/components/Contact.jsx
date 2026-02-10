@@ -1,59 +1,90 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from './ui/button';
 import { Mail, MessageSquare } from 'lucide-react';
-import { fadeInUp, staggerContainer } from '../animations/motionVariants';
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-20 bg-gray-900">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="contact" className="py-20 bg-gray-50 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, #000 1px, transparent 0)`,
+        backgroundSize: '32px 32px'
+      }} />
+
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
         <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
           className="text-center"
         >
           <motion.div
-            variants={fadeInUp}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-8"
           >
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-800 rounded-full mb-6">
-              <MessageSquare size={40} className="text-white" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Let's Work Together</h2>
-            <div className="w-20 h-1 bg-white mx-auto mb-6" />
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-2xl mb-6"
+            >
+              <MessageSquare size={32} className="text-white" />
+            </motion.div>
+            <motion.h2
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl md:text-5xl font-bold mb-4 text-gray-900"
+            >
+              Let's Work Together
+            </motion.h2>
+            <div className="w-20 h-1 bg-gray-900 mx-auto mb-6" />
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="text-gray-500 text-lg max-w-2xl mx-auto"
+            >
               I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-            </p>
+            </motion.p>
           </motion.div>
 
           <motion.div
-            variants={fadeInUp}
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button
+            <button
               onClick={() => window.location.href = 'mailto:Rizkymaulana.more@gmail.com'}
-              className="bg-white text-black hover:bg-gray-200 px-8 py-6 text-base font-medium group"
+              className="flex items-center justify-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-xl text-base font-medium hover:bg-gray-800 transition-colors shadow-sm"
             >
-              <Mail className="mr-2" size={20} />
+              <Mail size={20} />
               Send Email
-            </Button>
-            <Button
+            </button>
+            <button
               onClick={() => window.open('https://www.linkedin.com/in/rizki-maulana-arif-b711521a7/', '_blank')}
-              variant="outline"
-              className="border-gray-600 text-white hover:bg-gray-800 px-8 py-6 text-base font-medium"
+              className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-xl text-base font-medium border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm"
             >
               Connect on LinkedIn
-            </Button>
+            </button>
           </motion.div>
 
           <motion.div
-            variants={fadeInUp}
-            className="mt-12 pt-8 border-t border-gray-800"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="mt-12 pt-8 border-t border-gray-200"
           >
-            <p className="text-gray-500 text-sm">
+            <p className="text-gray-400 text-sm">
               <span className="font-mono">Rizkymaulana.more@gmail.com</span>
             </p>
           </motion.div>

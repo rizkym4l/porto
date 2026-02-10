@@ -14,7 +14,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = ['Skills', 'Experience', 'Projects', 'Certifications', 'Contact'];
+  const navItems = ['Education', 'Skills', 'Experience', 'Projects', 'Certifications', 'Contact'];
 
   const scrollToSection = (section) => {
     const element = document.getElementById(section.toLowerCase());

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-
+import Education from "./components/Education";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
@@ -14,10 +14,10 @@ function App() {
   useEffect(() => {
     // Enhanced smooth scroll behavior
     document.documentElement.style.scrollBehavior = "smooth";
-    
+
     // Optional: Add custom scroll padding to account for navbar height
     document.documentElement.style.scrollPaddingTop = "80px";
-    
+
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
     };
@@ -27,6 +27,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Hero />
+      <Education />
       <Skills />
       <Experience />
       <Projects />

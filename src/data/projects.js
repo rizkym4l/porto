@@ -35,22 +35,54 @@ import inter4 from "../assets/inter/empat.png"
 const interImg = [inter1,inter2,inter3,inter4]
 import tmAPI from "../assets/TM/as.png";
 import D from "../assets/Discover JagoScript — a digital marketplace built to empower your ideas.Sell and buy digital pr.webp";
+
+import sign1 from "../assets/sign/screencapture-localhost-5173-2026-02-10-11_23_53.png";
+import sign2 from "../assets/sign/screencapture-localhost-5173-login-2026-02-10-11_24_26.png";
+import sign3 from "../assets/sign/screencapture-localhost-5173-dashboard-2026-02-10-11_24_37.png";
+import sign4 from "../assets/sign/screencapture-localhost-5173-levels-2026-02-10-11_24_50.png";
+import sign5 from "../assets/sign/screencapture-localhost-5173-lesson-6989db3558c5be249faf8b9c-2026-02-10-11_25_09.png";
+import sign6 from "../assets/sign/screencapture-localhost-5173-profile-2026-02-10-11_25_23.png";
+
+const signImages = [sign1, sign2, sign3, sign4, sign5, sign6];
+
 export const projects = [
   {
-    id: 1,
-    name: "Yasmavoca Web Profile",
+    id: 7,
+    name: "Sign Language Learning Platform",
     description:
-      "Company profile website for Yasmavoca, an avocado shop based in Sukabumi, Indonesia. Designed with a clean and modern UI to showcase brand identity, products, and business information. Built using React and Tailwind CSS with full responsiveness across devices.",
+      "Interactive sign language learning platform built with AI-powered hand recognition. Created to help a close friend who is unable to speak — their classmates struggled to understand them, so I built this app to bridge the communication gap. Users can learn sign language through real-time hand gesture scanning that recognizes which letter they're signing, making learning intuitive and engaging.",
     techStack: [
       "React",
-      "JavaScript",
-      "Tailwind",
-      "HTML",
+      "Node.js",
+      "TensorFlow.js",
+      "AI Hand Recognition",
+      "MongoDB",
+      "Tailwind CSS",
+    ],
+    image: signImages,
+    github: null,
+    demo: null,
+    featured: true,
+    impact: "Bridging communication gaps through AI-powered accessibility",
+    comingSoon: true,
+  },
+  {
+    id: 5,
+    name: "Finance Web Platform",
+    description:
+      "Enterprise-level finance web platform developed for PT Viura Indo Tirta (water utility company in Bogor). The system handles transaction management, financial reporting, invoicing, and data visualization dashboards to support daily financial operations.",
+    techStack: [
+      "React",
+      "TypeScript",
+      "Redux Toolkit",
+      "Ant Design",
+      "Tailwind CSS",
       "frontend engineering",
     ],
-    image: ymvcImages,
-    github: "https://github.com/rizkym4l/yasmavocaCPDeploy",
-    demo: "https://yasmavoca.netlify.app",
+    image: fncImages,
+    github: null,
+    demo: null,
+    impact: "Zero critical production issues • 50+ reusable components • ~40% faster feature delivery",
   },
   {
     id: 2,
@@ -68,23 +100,7 @@ export const projects = [
     image: tmImages,
     github: "https://github.com/rizkym4l/PM_fe",
     demo: "https://task-manager-rizkimaulanaarf.netlify.app/dashboard",
-  },
-  {
-    id: 5,
-    name: "Finance Web Platform",
-    description:
-      "Enterprise-level finance web platform developed for a water utility company in Bogor, Indonesia. The system handles transaction management, financial reporting, invoicing, and data visualization dashboards to support daily financial operations.",
-    techStack: [
-      "React",
-      "TypeScript",
-      "Redux Toolkit",
-      "Ant Design",
-      "Tailwind CSS",
-      "frontend engineering",
-    ],
-    image: fncImages,
-    github: null,
-    demo: null,
+    impact: "Scalable team workflow management with real-time task tracking",
   },
   {
     id: 3,
@@ -95,16 +111,18 @@ export const projects = [
     image: interImg,
     github: null,
     demo: null,
+    impact: "Improved operational efficiency • Enhanced issue resolution transparency",
   },
   {
     id: 4,
     name: "Creative Hub Platform",
     description:
-      "Creative hub web platform designed for content creators and communities. Features dynamic UI components, smooth interactivity, and modular architecture using Livewire and Alpine.js without requiring full page reloads.",
+      "Creative hub web platform designed for content creators and communities at Jagoscript. Features dynamic UI components, smooth interactivity, and modular architecture using Livewire and Alpine.js without requiring full page reloads.",
     techStack: ["Livewire", "Laravel", "Tailwind CSS", "Alpine.js"],
     image: D,
     github: null,
     demo: null,
+    impact: "Optimized performance • Reduced average load time by up to 45%",
   },
   {
     id: 6,
@@ -122,5 +140,23 @@ export const projects = [
     image: tmAPI,
     github: "https://github.com/rizkym4l/PM_api",
     demo: "https://exquisite-llama-3cb720.netlify.app/",
+    impact: "Scalable RESTful architecture with JWT authentication",
+  },
+  {
+    id: 1,
+    name: "Yasmavoca Web Profile",
+    description:
+      "Company profile website for Yasmavoca, an avocado shop based in Sukabumi, Indonesia. Designed with a clean and modern UI to showcase brand identity, products, and business information. Built using React and Tailwind CSS with full responsiveness across devices.",
+    techStack: [
+      "React",
+      "JavaScript",
+      "Tailwind",
+      "HTML",
+      "frontend engineering",
+    ],
+    image: ymvcImages,
+    github: "https://github.com/rizkym4l/yasmavocaCPDeploy",
+    demo: "https://yasmavoca.netlify.app",
+    impact: "Clean brand showcase with full responsive design",
   },
 ];
