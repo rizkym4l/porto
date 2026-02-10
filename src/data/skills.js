@@ -15,7 +15,8 @@ export const skills = {
     { name: "Express.js", level: "Advanced" },
     { name: "MySQL", level: "Advanced" },
     { name: "PostgreSQL", level: "Intermediate" },
-    { name: "REST API", level: "Advanced" }
+    { name: "REST API", level: "Advanced" },
+    { name: "Firebase", level: "Intermediate" }
   ],
   tools: [
     { name: "Git & GitLab", level: "Advanced" },
@@ -23,6 +24,7 @@ export const skills = {
     { name: "Livewire", level: "Intermediate" },
     { name: "Problem Solving", level: "Advanced" },
     { name: "Team Collaboration", level: "Advanced" },
+    { name: "Docker", level: "Intermediate" },
     { name: "Time Management", level: "Advanced" }
   ]
 };
