@@ -53,7 +53,7 @@ export const projects = [
       "Interactive sign language learning platform built with AI-powered hand recognition. Created to help a close friend who is unable to speak — their classmates struggled to understand them, so I built this app to bridge the communication gap. Users can learn sign language through real-time hand gesture scanning that recognizes which letter they're signing, making learning intuitive and engaging.",
     techStack: [
       "React",
-      "Node.js",
+      "Nest.js",
       "TensorFlow.js",
       "AI Hand Recognition",
       "MongoDB",
