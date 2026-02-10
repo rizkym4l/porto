@@ -48,7 +48,7 @@ const reviews = [
   },
   {
     name: "Rizky Bachtiar",
-    role: "Client, UNSIA",
+    role: "Client",
     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2ywDEoTHS-CjhkNudZLMd9pQgo07e1hJopA&s",
     month: "Dec 2025",
     rating: 5,
@@ -80,7 +80,7 @@ const reviews = [
   },
   {
     name: "Rizky Bachtiar",
-    role: "Client, UNSIA",
+    role: "Client",
     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2ywDEoTHS-CjhkNudZLMd9pQgo07e1hJopA&s",
     month: "Dec 2025",
     rating: 5,
