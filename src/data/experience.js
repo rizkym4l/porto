@@ -27,7 +27,7 @@ export const experience = [
   {
     id: 3,
     company: "PT 4NET Prima Solusi",
-    position: "Intern Fullstack Developer",
+    position: "Contract Fullstack Developer",
     location: "Depok, Indonesia",
     period: "January 2024 - July 2024",
     responsibilities: [
