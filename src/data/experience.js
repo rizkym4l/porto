@@ -4,7 +4,7 @@ export const experience = [
     company: "Software Fintools",
     position: "Remote Contract Frontend Developer",
     location: "Remote, Indonesia",
-    period: "June 2025 - Present",
+    period: "June 2025 - February 2026",
     responsibilities: [
       "Developed finance web platform for PT Viura Indo Tirta with high accuracy and performance",
       "Built scalable frontend using React, TypeScript, Redux Toolkit, and Ant Design",

@@ -108,8 +108,8 @@ const Experience = () => {
                       transition={{ delay: 0.5 }}
                       className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium"
                     >
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                      Current Position
+                      {/* <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                      Current Position */}
                     </motion.div>
                   )}
                 </motion.div>
