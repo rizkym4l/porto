@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import AboutMe from "./components/AboutMe";
 import Education from "./components/Education";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
@@ -27,6 +28,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Hero />
+      <AboutMe />
       <Education />
       <Skills />
       <Experience />
