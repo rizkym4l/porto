@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "./ui/badge";
 import { projects } from "../data/projects";
@@ -7,18 +7,19 @@ import {
   ExternalLink,
   ChevronLeft,
   ChevronRight,
-  X,
   Sparkles,
   TrendingUp,
-  Clock,
   Zap,
-  ArrowUpRight,
+  Play,
+  User,
+  Briefcase,
 } from "lucide-react";
 import Swal from "sweetalert2";
 
 const Projects = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState({});
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [showcaseProject, setShowcaseProject] = useState(projects[0]);
+  const showcaseRef = useRef(null);
 
   const showToast = (message, icon = "info") => {
     Swal.fire({
@@ -67,6 +68,10 @@ const Projects = () => {
     return Array.isArray(project.image) ? project.image : [project.image];
   };
 
+  const getFirstImage = (project) => {
+    return Array.isArray(project.image) ? project.image[0] : project.image;
+  };
+
   const handleGithubClick = (project) => {
     if (project.comingSoon) {
       showToast("Coming Soon! Stay tuned.", "info");
@@ -90,8 +95,11 @@ const Projects = () => {
     }
   };
 
-  const featuredProject = projects.find((p) => p.featured);
-  const regularProjects = projects.filter((p) => !p.featured);
+  const handleSelectProject = (project) => {
+    if (project.id === showcaseProject.id) return;
+    setShowcaseProject(project);
+    showcaseRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const ImageCarousel = ({ project, className = "", rounded = "rounded-2xl" }) => {
     const images = getImages(project);
@@ -99,15 +107,12 @@ const Projects = () => {
 
     return (
       <div
-        className={`relative overflow-hidden ${rounded} group cursor-pointer ${className}`}
-        onClick={() => setSelectedProject(project)}
+        className={`relative overflow-hidden ${rounded} group ${className}`}
       >
-        <motion.img
+        <img
           src={getCurrentImage(project)}
           alt={project.name}
           className="w-full h-full object-cover"
-          whileHover={{ scale: 1.03 }}
-          transition={{ duration: 0.5 }}
         />
 
         {hasMultiple && (
@@ -157,7 +162,7 @@ const Projects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <motion.div
             initial={{ scale: 0 }}
@@ -177,383 +182,226 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        {/* ===== FEATURED PROJECT — Sign Language ===== */}
-        {featuredProject && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="mb-24"
-          >
-            {/* Featured label */}
+        {/* ===== SHOWCASE AREA ===== */}
+        <div ref={showcaseRef} className="scroll-mt-24">
+          <AnimatePresence mode="wait">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="flex items-center gap-2 mb-6"
+              key={showcaseProject.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="mb-16"
             >
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-900 rounded-full text-white text-xs font-medium">
-                <Zap size={12} className="text-yellow-400" />
-                Featured Project
-              </div>
-              {featuredProject.comingSoon && (
-                <motion.div
-                  animate={{ y: [0, -2, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold border border-blue-200"
-                >
-                  <Clock size={12} />
-                  Coming Soon
-                </motion.div>
-              )}
-            </motion.div>
-
-            <div className="md:flex gap-10 items-center">
-              {/* Image */}
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="md:w-3/5 mb-8 md:mb-0"
-              >
-                <div className="relative">
-                  <motion.div
-                    className="absolute -inset-3 bg-gradient-to-br from-blue-100 to-purple-100 rounded-3xl -z-10"
-                    animate={{ rotate: [0, 1, 0, -1, 0] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <ImageCarousel
-                    project={featuredProject}
-                    className="h-72 md:h-96 shadow-xl"
-                    rounded="rounded-2xl"
-                  />
-                </div>
-              </motion.div>
-
-              {/* Content */}
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="md:w-2/5"
-              >
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                  {featuredProject.name}
-                </h3>
-
-                <p className="text-gray-600 mb-5 leading-relaxed">
-                  {featuredProject.description}
-                </p>
-
-                {featuredProject.impact && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 }}
-                    className="flex items-start gap-2 mb-5 p-3 bg-blue-50 rounded-xl border border-blue-100"
-                  >
-                    <TrendingUp size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-blue-700 text-sm font-medium">
-                      {featuredProject.impact}
-                    </span>
-                  </motion.div>
+              {/* Badges */}
+              <div className="flex items-center gap-2 mb-6 flex-wrap">
+                {showcaseProject.featured && (
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-900 rounded-full text-white text-xs font-medium">
+                    <Zap size={12} className="text-yellow-400" />
+                    Featured
+                  </div>
                 )}
+                {showcaseProject.type === "client" ? (
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-700 rounded-full text-xs font-semibold border border-amber-200">
+                    <Briefcase size={12} />
+                    Client Project
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-50 text-violet-700 rounded-full text-xs font-semibold border border-violet-200">
+                    <User size={12} />
+                    Personal Project
+                  </div>
+                )}
+                {showcaseProject.video && (
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-semibold border border-green-200">
+                    <Play size={12} />
+                    Beta
+                  </div>
+                )}
+              </div>
 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {featuredProject.techStack.map((tech, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 + idx * 0.04 }}
-                    >
+              <div className="md:flex gap-10 items-start">
+                {/* Left: Image + Video side by side */}
+                <div className="md:w-3/5 mb-8 md:mb-0">
+                  <div className="flex gap-3 h-72 md:h-96">
+                    <div className="relative flex-1 h-full">
+                      <ImageCarousel
+                        project={showcaseProject}
+                        className="h-full shadow-xl"
+                        rounded="rounded-2xl"
+                      />
+                    </div>
+                    {showcaseProject.video && (
+                      <div className="flex flex-col items-center gap-2 w-[100px] md:w-[160px] flex-shrink-0 h-full">
+                        <div className="flex items-center gap-1.5 flex-shrink-0">
+                          <Play size={12} className="text-gray-900" />
+                          <span className="text-[11px] font-semibold text-gray-900">Demo</span>
+                        </div>
+                        <video
+                          controls
+                          className="w-full flex-1 min-h-0 rounded-xl shadow-lg border border-gray-200 object-contain"
+                          preload="metadata"
+                          playsInline
+                        >
+                          <source src={showcaseProject.video} type="video/mp4" />
+                        </video>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Right: Content */}
+                <div className="md:w-2/5">
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                    {showcaseProject.name}
+                  </h3>
+
+                  <p className="text-gray-600 mb-5 leading-relaxed">
+                    {showcaseProject.description}
+                  </p>
+
+                  {showcaseProject.impact && (
+                    <div className="flex items-start gap-2 mb-5 p-3 bg-blue-50 rounded-xl border border-blue-100">
+                      <TrendingUp size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-blue-700 text-sm font-medium">
+                        {showcaseProject.impact}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {showcaseProject.techStack.map((tech, idx) => (
                       <Badge
+                        key={idx}
                         variant="outline"
                         className="bg-white border-gray-200 text-gray-700 font-mono text-xs"
                       >
                         {tech}
                       </Badge>
-                    </motion.div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
 
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => handleGithubClick(featuredProject)}
-                    className="flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors"
-                  >
-                    <Github size={16} />
-                    Coming Soon
-                  </button>
-                  <button
-                    onClick={() => handleDemoClick(featuredProject)}
-                    className="flex items-center gap-2 px-5 py-2.5 bg-white text-gray-900 rounded-xl text-sm font-medium border border-gray-200 hover:bg-gray-50 transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                    Coming Soon
-                  </button>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-
-        {/* ===== REGULAR PROJECTS — Alternating Showcase ===== */}
-        <div className="space-y-24">
-          {regularProjects.map((project, index) => {
-            const isReversed = index % 2 !== 0;
-
-            return (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                <div className={`md:flex gap-10 items-center ${isReversed ? 'md:flex-row-reverse' : ''}`}>
-                  {/* Image */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isReversed ? 40 : -40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    className="md:w-3/5 mb-8 md:mb-0"
-                  >
-                    <motion.div
-                      whileHover={{ y: -5 }}
-                      transition={{ duration: 0.3 }}
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => handleGithubClick(showcaseProject)}
+                      className="flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors"
                     >
-                      <ImageCarousel
-                        project={project}
-                        className="h-56 md:h-80 shadow-lg border border-gray-100"
-                        rounded="rounded-2xl"
-                      />
-                    </motion.div>
-                  </motion.div>
+                      <Github size={16} />
+                      {showcaseProject.comingSoon ? "Coming Soon" : "View Code"}
+                    </button>
+                    <button
+                      onClick={() => handleDemoClick(showcaseProject)}
+                      className="flex items-center gap-2 px-5 py-2.5 bg-white text-gray-900 rounded-xl text-sm font-medium border border-gray-200 hover:bg-gray-50 transition-colors"
+                    >
+                      <ExternalLink size={16} />
+                      {showcaseProject.video ? "Try Beta" : showcaseProject.comingSoon ? "Coming Soon" : "Live Demo"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-                  {/* Content */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isReversed ? -40 : 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="md:w-2/5"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-mono text-gray-400">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <div className="w-8 h-px bg-gray-300" />
-                    </div>
+        {/* ===== PROJECT SELECTOR GRID ===== */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-px bg-gray-300" />
+            <span className="text-sm font-medium text-gray-400 uppercase tracking-wider">All Projects</span>
+            <div className="flex-1 h-px bg-gray-200" />
+          </div>
 
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
-                      {project.name}
-                    </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {projects.map((project) => {
+              const isActive = showcaseProject.id === project.id;
+              const isClient = project.type === "client";
+              return (
+                <motion.div
+                  key={project.id}
+                  onClick={() => handleSelectProject(project)}
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  className={`cursor-pointer rounded-2xl overflow-hidden transition-all duration-300 ${
+                    isActive
+                      ? "border-2 border-gray-900 shadow-xl ring-4 ring-gray-900/10"
+                      : "border-2 border-transparent shadow-md hover:shadow-xl hover:border-gray-200"
+                  }`}
+                >
+                  {/* Thumbnail */}
+                  <div className="relative h-32 sm:h-36 overflow-hidden bg-gray-100">
+                    <img
+                      src={getFirstImage(project)}
+                      alt={project.name}
+                      className={`w-full h-full object-cover transition-transform duration-500 ${!isActive ? 'group-hover:scale-105' : ''}`}
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-                    {project.impact && (
-                      <div className="flex items-start gap-2 mb-3">
-                        <TrendingUp size={14} className="text-green-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-green-700 text-xs font-medium">
-                          {project.impact}
-                        </span>
+                    {isActive && (
+                      <div className="absolute inset-0 bg-gray-900/20 flex items-center justify-center backdrop-blur-[1px]">
+                        <div className="px-3 py-1.5 bg-gray-900 text-white text-[10px] font-bold rounded-full shadow-lg">
+                          Now Showing
+                        </div>
                       </div>
                     )}
 
-                    <p className="text-gray-500 text-sm mb-5 leading-relaxed line-clamp-4">
-                      {project.description}
-                    </p>
+                    {/* Type badge on thumbnail */}
+                    <div className="absolute top-2 left-2">
+                      {isClient ? (
+                        <div className="flex items-center gap-1 px-2 py-0.5 bg-amber-500/90 backdrop-blur-sm text-white text-[9px] font-bold rounded-full shadow-sm">
+                          <Briefcase size={9} />
+                          Client
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1 px-2 py-0.5 bg-violet-500/90 backdrop-blur-sm text-white text-[9px] font-bold rounded-full shadow-sm">
+                          <User size={9} />
+                          Personal
+                        </div>
+                      )}
+                    </div>
 
-                    <div className="flex flex-wrap gap-1.5 mb-5">
-                      {project.techStack.map((tech, idx) => (
+                    {/* Featured star */}
+                    {project.featured && (
+                      <div className="absolute top-2 right-2">
+                        <div className="w-6 h-6 bg-yellow-400/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                          <Zap size={11} className="text-yellow-900" />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Project name overlay on image */}
+                    <div className="absolute bottom-2 left-2 right-2">
+                      <h4 className="text-white text-xs sm:text-sm font-bold truncate drop-shadow-lg">
+                        {project.name}
+                      </h4>
+                    </div>
+                  </div>
+
+                  {/* Info */}
+                  <div className="p-2.5 bg-white">
+                    <div className="flex gap-1 overflow-hidden">
+                      {project.techStack.slice(0, 2).map((tech, idx) => (
                         <span
                           key={idx}
-                          className="px-2.5 py-1 bg-gray-100 text-gray-600 rounded-lg text-xs font-mono"
+                          className="px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded text-[10px] font-mono truncate"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => handleGithubClick(project)}
-                        className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-900 transition-colors group/btn"
-                      >
-                        <Github size={16} />
-                        <span>Code</span>
-                        <ArrowUpRight size={14} className="opacity-0 group-hover/btn:opacity-100 transition-opacity" />
-                      </button>
-                      <button
-                        onClick={() => handleDemoClick(project)}
-                        className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-900 transition-colors group/btn"
-                      >
-                        <ExternalLink size={16} />
-                        <span>Demo</span>
-                        <ArrowUpRight size={14} className="opacity-0 group-hover/btn:opacity-100 transition-opacity" />
-                      </button>
-                      <button
-                        onClick={() => setSelectedProject(project)}
-                        className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-900 transition-colors group/btn ml-auto"
-                      >
-                        <span>Details</span>
-                        <ArrowUpRight size={14} className="opacity-0 group-hover/btn:opacity-100 transition-opacity" />
-                      </button>
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
       </div>
-
-      {/* ===== MODAL ===== */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedProject(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 bg-white/80 hover:bg-white text-gray-900 p-2 rounded-full z-10 shadow-md"
-              >
-                <X size={20} />
-              </button>
-
-              {/* Image */}
-              <div className="relative h-80 md:h-96 bg-gray-100">
-                <img
-                  src={getCurrentImage(selectedProject)}
-                  alt={selectedProject.name}
-                  className="w-full h-full object-contain"
-                />
-
-                {getImages(selectedProject).length > 1 && (
-                  <>
-                    <button
-                      onClick={(e) =>
-                        handlePrevImage(
-                          selectedProject.id,
-                          getImages(selectedProject).length,
-                          e
-                        )
-                      }
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 p-3 rounded-full shadow-md"
-                    >
-                      <ChevronLeft size={20} />
-                    </button>
-                    <button
-                      onClick={(e) =>
-                        handleNextImage(
-                          selectedProject.id,
-                          getImages(selectedProject).length,
-                          e
-                        )
-                      }
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 p-3 rounded-full shadow-md"
-                    >
-                      <ChevronRight size={20} />
-                    </button>
-
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                      {getImages(selectedProject).map((_, idx) => (
-                        <div
-                          key={idx}
-                          className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                            (currentImageIndex[selectedProject.id] || 0) === idx
-                              ? "bg-gray-900 w-8"
-                              : "bg-gray-400/50"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
-
-              {/* Details */}
-              <div className="p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-                    {selectedProject.name}
-                  </h3>
-                  {selectedProject.comingSoon && (
-                    <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold border border-blue-200">
-                      Coming Soon
-                    </span>
-                  )}
-                </div>
-
-                {selectedProject.impact && (
-                  <div className="flex items-start gap-2 mb-4 p-3 bg-green-50 rounded-xl border border-green-100">
-                    <TrendingUp size={16} className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-green-700 text-sm font-medium">
-                      {selectedProject.impact}
-                    </span>
-                  </div>
-                )}
-
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  {selectedProject.description}
-                </p>
-
-                <div className="mb-6">
-                  <h4 className="text-gray-900 font-semibold mb-3">
-                    Technologies Used
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.techStack.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-mono"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => handleGithubClick(selectedProject)}
-                    className="flex-1 flex items-center justify-center gap-2 px-5 py-3 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors"
-                  >
-                    <Github size={18} />
-                    {selectedProject.comingSoon ? "Coming Soon" : "View Code"}
-                  </button>
-                  <button
-                    onClick={() => handleDemoClick(selectedProject)}
-                    className="flex-1 flex items-center justify-center gap-2 px-5 py-3 bg-white text-gray-900 rounded-xl text-sm font-medium border border-gray-200 hover:bg-gray-50 transition-colors"
-                  >
-                    <ExternalLink size={18} />
-                    {selectedProject.comingSoon ? "Coming Soon" : "Live Demo"}
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

@@ -43,6 +43,8 @@ import sign4 from "../assets/sign/screencapture-localhost-5173-levels-2026-02-10
 import sign5 from "../assets/sign/screencapture-localhost-5173-lesson-6989db3558c5be249faf8b9c-2026-02-10-11_25_09.png";
 import sign6 from "../assets/sign/screencapture-localhost-5173-profile-2026-02-10-11_25_23.png";
 
+import signVideo from "../assets/sign/WhatsApp Video 2026-02-14 at 17.38.44.mp4";
+
 const signImages = [sign1, sign2, sign3, sign4, sign5, sign6];
 
 export const projects = [
@@ -61,10 +63,12 @@ export const projects = [
     ],
     image: signImages,
     github: null,
-    demo: null,
+    demo: "https://sanssign.netlify.app/",
     featured: true,
     impact: "Bridging communication gaps through AI-powered accessibility",
-    comingSoon: true,
+    comingSoon: false,
+    video: signVideo,
+    type: "personal",
   },
   {
     id: 5,
@@ -83,6 +87,7 @@ export const projects = [
     github: null,
     demo: null,
     impact: "Zero critical production issues • 50+ reusable components • ~40% faster feature delivery",
+    type: "client",
   },
   {
     id: 2,
@@ -101,6 +106,7 @@ export const projects = [
     github: "https://github.com/rizkym4l/PM_fe",
     demo: "https://task-manager-rizkimaulanaarf.netlify.app/dashboard",
     impact: "Scalable team workflow management with real-time task tracking",
+    type: "personal",
   },
   {
     id: 3,
@@ -112,6 +118,7 @@ export const projects = [
     github: null,
     demo: null,
     impact: "Improved operational efficiency • Enhanced issue resolution transparency",
+    type: "client",
   },
   {
     id: 4,
@@ -123,6 +130,7 @@ export const projects = [
     github: null,
     demo: null,
     impact: "Optimized performance • Reduced average load time by up to 45%",
+    type: "client",
   },
   {
     id: 6,
@@ -141,6 +149,7 @@ export const projects = [
     github: "https://github.com/rizkym4l/PM_api",
     demo: "https://exquisite-llama-3cb720.netlify.app/",
     impact: "Scalable RESTful architecture with JWT authentication",
+    type: "personal",
   },
   {
     id: 1,
@@ -155,8 +164,9 @@ export const projects = [
       "frontend engineering",
     ],
     image: ymvcImages,
-    github: "https://github.com/rizkym4l/yasmavocaCPDeploy",
-    demo: "https://yasmavoca.netlify.app",
+    github: null,
+    demo: null,
     impact: "Clean brand showcase with full responsive design",
+    type: "client",
   },
 ];

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MessageSquare } from 'lucide-react';
+import handshakeImg from '../assets/lets/dreamina-2026-02-16-3185-Close-up of two hands shaking firmly, si....jpeg';
 
 const Contact = () => {
   return (
@@ -53,6 +54,20 @@ const Contact = () => {
             >
               I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
             </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.45, duration: 0.5 }}
+            className="mb-10"
+          >
+            <img
+              src={handshakeImg}
+              alt="Let's work together"
+              className="w-48 h-48 mx-auto rounded-full object-cover shadow-lg border-4 border-white"
+            />
           </motion.div>
 
           <motion.div

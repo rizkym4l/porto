@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(npm install:*)",
-      "Bash(npx craco build:*)"
+      "Bash(npx craco build:*)",
+      "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" diff)",
+      "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" log --oneline -5)",
+      "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" diff src/data/skills.js)",
+      "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" diff HEAD src/data/skills.js)",
+      "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" add src/components/AboutMe.jsx src/App.js src/components/Navbar.jsx)"
     ]
   }
 }
