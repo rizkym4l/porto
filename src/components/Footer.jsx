@@ -1,51 +1,36 @@
 import React from 'react';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
-const Footer = () => {
-  return (
-    <footer className="bg-white border-t border-gray-200 py-8">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} Rizki Maulana Arif. All rights reserved.
-            </p>
-          </div>
+const Footer = () => (
+  <footer className="bg-[#050514] border-t border-white/5 py-8">
+    <div className="max-w-7xl mx-auto px-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
 
-          <div className="flex items-center space-x-6">
-            <a
-              href="https://github.com/rizkym4l"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-900 transition-colors"
-            >
-              <Github size={20} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/rizki-maulana-arif-b711521a7/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-900 transition-colors"
-            >
-              <Linkedin size={20} />
-            </a>
-            <a
-              href="mailto:Rizkymaulana.more@gmail.com"
-              className="text-gray-400 hover:text-gray-900 transition-colors"
-            >
-              <Mail size={20} />
-            </a>
-          </div>
-        </div>
+        <p className="font-pixel text-[8px] text-white/20 tracking-widest">
+          © {new Date().getFullYear()} RIZKI MAULANA ARIF
+        </p>
 
-        <div className="mt-6 pt-6 border-t border-gray-100 text-center">
-          <p className="text-gray-400 text-xs font-mono">
-            Built with React, Tailwind CSS & Framer Motion
-          </p>
+        <div className="flex items-center gap-5">
+          {[
+            { href: "https://github.com/rizkym4l", icon: <Github size={17} /> },
+            { href: "https://www.linkedin.com/in/rizki-maulana-arif-b711521a7/", icon: <Linkedin size={17} /> },
+            { href: "mailto:Rizkymaulana.more@gmail.com", icon: <Mail size={17} /> },
+          ].map(({ href, icon }) => (
+            <a key={href} href={href} target="_blank" rel="noopener noreferrer"
+              className="text-white/20 hover:text-cyan-400 transition-colors duration-200">
+              {icon}
+            </a>
+          ))}
         </div>
       </div>
-    </footer>
-  );
-};
+
+      <div className="mt-6 pt-6 border-t border-white/5 text-center">
+        <p className="font-pixel text-[7px] text-white/10 tracking-widest">
+          BUILT WITH REACT · TAILWIND CSS · FRAMER MOTION
+        </p>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;

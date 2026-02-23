@@ -1,147 +1,162 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, MapPin, Calendar, BookOpen } from 'lucide-react';
+import { MapPin, Calendar } from 'lucide-react';
+import telkomLogo from '../assets/sekolah/images (1).png';
+import smkLogo from '../assets/sekolah/images.png';
 
 const educationData = [
   {
     id: 1,
-    institution: "Telkom University Bandung",
+    institution: "Telkom University",
+    location_short: "Bandung",
     degree: "Bachelor of Applied Information Systems",
     major: "Smart City",
     period: "2025 — 2029",
     location: "Bandung, Indonesia",
     type: "university",
-    description: "Currently pursuing a degree in Applied Information Systems with a focus on Smart City technologies, IoT, and modern software development.",
+    active: true,
+    logo: telkomLogo,
+    accent: "cyan",
+    description:
+      "Pursuing a degree in Applied Information Systems with a focus on Smart City technologies, IoT, and modern software development.",
   },
   {
     id: 2,
     institution: "SMK Wikrama Bogor",
+    location_short: "Bogor",
     degree: "Vocational High School Diploma",
     major: "Software Engineering (PPLG)",
     period: "2022 — 2025",
     location: "Bogor, Indonesia",
     type: "highschool",
-    description: "Graduated with a strong foundation in software engineering, covering full-stack development, database design, and agile methodologies.",
+    active: false,
+    logo: smkLogo,
+    accent: "purple",
+    description:
+      "Graduated with a strong foundation in software engineering — full-stack development, database design, and agile methodologies.",
   },
 ];
 
-const Education = () => {
-  return (
-    <section id="education" className="py-20 bg-white relative overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `radial-gradient(circle at 1px 1px, #000 1px, transparent 0)`,
-        backgroundSize: '40px 40px'
-      }} />
+const accentMap = {
+  cyan:   { label: "text-cyan-400",   border: "border-cyan-500/30",   glow: "shadow-cyan-500/20",   bg: "bg-cyan-500/10",   badge: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40"   },
+  purple: { label: "text-purple-400", border: "border-purple-500/30", glow: "shadow-purple-500/20", bg: "bg-purple-500/10", badge: "bg-purple-500/20 text-purple-300 border-purple-500/40" },
+};
 
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-            className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-2xl mb-6"
-          >
-            <GraduationCap size={32} className="text-white" />
-          </motion.div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Education</h2>
-          <div className="w-20 h-1 bg-gray-900 mx-auto mb-4" />
-          <p className="text-gray-500 max-w-lg mx-auto">
-            Academic background in Information Systems and Software Engineering
-          </p>
-        </motion.div>
+const Education = () => (
+  <section id="education" className="py-24 bg-[#050514] relative overflow-hidden">
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gray-200" />
+    {/* Pixel dot grid */}
+    <div className="absolute inset-0 pointer-events-none" style={{
+      backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)',
+      backgroundSize: '28px 28px',
+    }} />
 
-          {educationData.map((edu, index) => (
+    {/* Glow blob */}
+    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 pointer-events-none"
+      style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.05) 0%, transparent 70%)' }} />
+
+    <div className="max-w-5xl mx-auto px-6 relative z-10">
+
+      {/* ── Header ── */}
+      <motion.div
+        className="text-center mb-16"
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.6 }}
+      >
+        <p className="font-pixel text-[9px] text-cyan-400 tracking-[0.3em] uppercase mb-4">
+          &gt; education_
+        </p>
+        <h2 className="font-pixel text-2xl md:text-3xl text-white mb-5">EDUCATION</h2>
+        <div className="h-px max-w-xs mx-auto bg-gradient-to-r from-transparent via-cyan-500/60 to-transparent" />
+      </motion.div>
+
+      {/* ── Cards ── */}
+      <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+        {educationData.map((edu, i) => {
+          const a = accentMap[edu.accent];
+          return (
             <motion.div
               key={edu.id}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
-              className={`relative mb-12 last:mb-0 md:flex items-center ${
-                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-              }`}
+              initial={{ opacity: 0, y: 50, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: i * 0.15, ease: 'easeOut' }}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              className={`relative bg-white/5 border ${a.border} rounded-2xl overflow-hidden backdrop-blur-sm shadow-xl ${a.glow}`}
             >
-              {/* Timeline dot */}
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 300, delay: index * 0.2 + 0.3 }}
-                className="absolute left-8 md:left-1/2 -translate-x-1/2 z-10"
-              >
-                <div className="w-4 h-4 bg-gray-900 rounded-full border-4 border-white shadow-md" />
-              </motion.div>
-
-              {/* Content card */}
-              <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'} pl-20 md:pl-0`}>
-                <motion.div
-                  whileHover={{ y: -4, boxShadow: "0 20px 40px rgba(0,0,0,0.08)" }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-gray-300 transition-all"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className={`p-3 rounded-xl ${edu.type === 'university' ? 'bg-gray-900' : 'bg-gray-700'}`}>
-                      {edu.type === 'university' ? (
-                        <GraduationCap size={24} className="text-white" />
-                      ) : (
-                        <BookOpen size={24} className="text-white" />
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold text-gray-900">{edu.institution}</h3>
-                      <p className="text-gray-700 font-medium">{edu.degree}</p>
-                      <p className="text-gray-500 text-sm font-mono">{edu.major}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-4 mb-3 text-sm text-gray-500">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} />
-                      <span>{edu.period}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <MapPin size={14} />
-                      <span>{edu.location}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-500 text-sm leading-relaxed">{edu.description}</p>
-
-                  {edu.type === 'university' && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 }}
-                      className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium"
-                    >
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                      Currently Enrolled
-                    </motion.div>
-                  )}
-                </motion.div>
+              {/* Watermark logo */}
+              <div className="absolute -right-6 -bottom-6 w-36 h-36 opacity-[0.07] pointer-events-none">
+                <img src={edu.logo} alt="" className="w-full h-full object-contain" />
               </div>
 
-              {/* Spacer */}
-              <div className="hidden md:block md:w-1/2" />
+              {/* Top accent bar */}
+              <div className={`h-1 w-full ${edu.accent === 'cyan' ? 'bg-gradient-to-r from-cyan-500 via-cyan-400 to-transparent' : 'bg-gradient-to-r from-purple-500 via-purple-400 to-transparent'}`} />
+
+              <div className="p-7">
+                {/* Logo + Institution */}
+                <div className="flex items-center gap-4 mb-6">
+                  <div className={`w-16 h-16 rounded-xl ${a.bg} border ${a.border} p-2 flex items-center justify-center flex-shrink-0`}>
+                    <img
+                      src={edu.logo}
+                      alt={edu.institution}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-pixel text-[11px] text-white leading-tight mb-1">
+                      {edu.institution}
+                    </h3>
+                    <p className={`text-xs font-pixelify ${a.label}`}>{edu.location_short}</p>
+                  </div>
+                </div>
+
+                {/* Degree & Major */}
+                <p className="text-white/80 font-pixelify text-base font-semibold mb-1">
+                  {edu.degree}
+                </p>
+                <p className={`font-mono text-xs mb-5 ${a.label}`}>{edu.major}</p>
+
+                {/* Meta */}
+                <div className="flex flex-wrap gap-3 mb-5">
+                  <div className="flex items-center gap-1.5 text-white/40 text-xs">
+                    <Calendar size={12} />
+                    <span className="font-mono">{edu.period}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-white/40 text-xs">
+                    <MapPin size={12} />
+                    <span>{edu.location}</span>
+                  </div>
+                </div>
+
+                <p className="text-white/40 text-sm leading-relaxed mb-5">{edu.description}</p>
+
+                {/* Status badge */}
+                {edu.active ? (
+                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border font-pixel ${a.badge}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${edu.accent === 'cyan' ? 'bg-cyan-400' : 'bg-purple-400'}`} />
+                    Currently Enrolled
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-white/40 font-pixel">
+                    Graduated
+                  </div>
+                )}
+              </div>
             </motion.div>
-          ))}
-        </div>
+          );
+        })}
       </div>
-    </section>
-  );
-};
+
+      {/* Timeline connector between cards (desktop) */}
+      <div className="hidden md:flex justify-center mt-8 items-center gap-3">
+        <div className="h-px w-24 bg-gradient-to-r from-transparent to-cyan-500/40" />
+        <div className="w-2 h-2 rounded-full bg-cyan-500/60" />
+        <div className="font-pixel text-[7px] text-white/20 tracking-widest">LEARNING PATH</div>
+        <div className="w-2 h-2 rounded-full bg-purple-500/60" />
+        <div className="h-px w-24 bg-gradient-to-l from-transparent to-purple-500/40" />
+      </div>
+    </div>
+  </section>
+);
 
 export default Education;

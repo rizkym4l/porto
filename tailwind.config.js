@@ -9,7 +9,9 @@ module.exports = {
   	extend: {
   		fontFamily: {
   			sans: ['IBM Plex Sans', 'sans-serif'],
-  			mono: ['Roboto Mono', 'monospace']
+  			mono: ['Roboto Mono', 'monospace'],
+  			pixel: ['"Press Start 2P"', 'monospace'],
+  			pixelify: ['"Pixelify Sans"', 'sans-serif'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

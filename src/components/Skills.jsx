@@ -1,107 +1,231 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { skills } from '../data/skills';
 import { Code2, Server, Wrench } from 'lucide-react';
+import { skills } from '../data/skills';
 
-const SkillPill = ({ skill, delay }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 15 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.4, delay }}
-    whileHover={{ y: -3, boxShadow: "0 8px 25px rgba(0,0,0,0.08)" }}
-    className="flex items-center gap-3 px-4 py-3 bg-white rounded-xl border border-gray-100 shadow-sm hover:border-gray-300 transition-all cursor-default"
-  >
-    <span className="text-gray-900 font-medium text-sm">{skill.name}</span>
-    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-      skill.level === 'Advanced'
-        ? 'bg-gray-900 text-white'
-        : 'bg-gray-100 text-gray-600'
-    }`}>
-      {skill.level}
-    </span>
-  </motion.div>
-);
+/* ── XP values per skill ── */
+const xpMap = {
+  "React.js": 92,        "Vue.js": 85,          "TypeScript": 88,
+  "JavaScript": 93,      "Tailwind CSS": 90,    "Redux Toolkit": 65,
+  "Ant Design": 62,      "Bootstrap": 80,
+  "Node.js": 87,         "Laravel": 84,         "Express.js": 86,
+  "MySQL": 85,           "PostgreSQL": 68,      "REST API": 90,
+  "Firebase": 64,        "NestJS": 82,
+  "Git & GitLab": 90,    "Agile/Scrum": 70,     "Livewire": 60,
+  "Problem Solving": 88, "Team Collaboration": 86, "Docker": 65,
+  "Time Management": 82,
+};
+const getXP = (name, level) =>
+  xpMap[name] ?? (level === 'Advanced' ? 82 : 60);
 
-const Skills = () => {
-  const skillGroups = [
-    {
-      title: "Frontend",
-      icon: <Code2 size={22} />,
-      skills: skills.frontend,
-    },
-    {
-      title: "Backend",
-      icon: <Server size={22} />,
-      skills: skills.backend,
-    },
-    {
-      title: "Tools & Skills",
-      icon: <Wrench size={22} />,
-      skills: skills.tools,
-    }
-  ];
+/* ── Rank label from XP ── */
+const getRank = (xp) => {
+  if (xp >= 90) return { label: 'SSS', color: 'text-yellow-300' };
+  if (xp >= 80) return { label: 'S',   color: 'text-cyan-300'   };
+  if (xp >= 70) return { label: 'A',   color: 'text-green-300'  };
+  return              { label: 'B',   color: 'text-white/50'   };
+};
+
+/* ── Group config ── */
+const groups = [
+  {
+    key: 'frontend',
+    title: 'FRONTEND',
+    class: 'MAGE',
+    icon: <Code2 size={18} />,
+    accent: 'cyan',
+    barFrom: '#22d3ee',
+    barTo: '#06b6d4',
+    border: 'border-cyan-500/30',
+    bg: 'bg-cyan-500/8',
+    labelColor: 'text-cyan-400',
+    glow: 'shadow-cyan-500/10',
+  },
+  {
+    key: 'backend',
+    title: 'BACKEND',
+    class: 'WARRIOR',
+    icon: <Server size={18} />,
+    accent: 'purple',
+    barFrom: '#c084fc',
+    barTo: '#a855f7',
+    border: 'border-purple-500/30',
+    bg: 'bg-purple-500/8',
+    labelColor: 'text-purple-400',
+    glow: 'shadow-purple-500/10',
+  },
+  {
+    key: 'tools',
+    title: 'TOOLS',
+    class: 'RANGER',
+    icon: <Wrench size={18} />,
+    accent: 'green',
+    barFrom: '#4ade80',
+    barTo: '#22c55e',
+    border: 'border-green-500/30',
+    bg: 'bg-green-500/8',
+    labelColor: 'text-green-400',
+    glow: 'shadow-green-500/10',
+  },
+];
+
+/* ── Single skill row ── */
+const SkillRow = ({ skill, barFrom, barTo, labelColor, groupIdx, skillIdx }) => {
+  const xp = getXP(skill.name, skill.level);
+  const rank = getRank(xp);
 
   return (
-    <section id="skills" className="py-20 bg-gray-50 relative overflow-hidden">
-      {/* Subtle dot pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `radial-gradient(circle at 1px 1px, #000 1px, transparent 0)`,
-        backgroundSize: '32px 32px'
-      }} />
+    <motion.div
+      initial={{ opacity: 0, x: -12 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: groupIdx * 0.1 + skillIdx * 0.05 }}
+      className="mb-3 last:mb-0"
+    >
+      {/* Name + rank + level */}
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-white/80 text-xs font-pixelify">{skill.name}</span>
+        <div className="flex items-center gap-2">
+          <span className={`font-pixel text-[7px] ${rank.color}`}>[{rank.label}]</span>
+          <span className={`font-pixel text-[8px] ${labelColor}`}>LV.{xp}</span>
+        </div>
+      </div>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      {/* XP bar track */}
+      <div className="relative h-3.5 bg-black/40 border border-white/8 overflow-hidden" style={{ imageRendering: 'pixelated' }}>
+        {/* Filled bar */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Skills & Expertise</h2>
-          <div className="w-20 h-1 bg-gray-900 mx-auto mb-4" />
-          <p className="text-gray-500 max-w-lg mx-auto">
-            Technologies and methodologies I work with daily
-          </p>
-        </motion.div>
+          className="absolute left-0 top-0 h-full"
+          style={{ background: `linear-gradient(to right, ${barFrom}, ${barTo})` }}
+          initial={{ width: '0%' }}
+          whileInView={{ width: `${xp}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: groupIdx * 0.1 + skillIdx * 0.06, ease: 'easeOut' }}
+        />
+        {/* Pixel block segments */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(90deg, transparent 0px, transparent 7px, rgba(0,0,0,0.35) 7px, rgba(0,0,0,0.35) 8px)',
+          }}
+        />
+        {/* Shine gloss */}
+        <div className="absolute inset-x-0 top-0 h-1/3 bg-white/10 pointer-events-none" />
+      </div>
+    </motion.div>
+  );
+};
 
-        <div className="grid md:grid-cols-3 gap-10">
-          {skillGroups.map((group, groupIndex) => (
+/* ── Main component ── */
+const Skills = () => (
+  <section id="skills" className="py-24 bg-[#050514] relative overflow-hidden">
+
+    {/* Pixel dot grid */}
+    <div className="absolute inset-0 pointer-events-none" style={{
+      backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)',
+      backgroundSize: '28px 28px',
+    }} />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] pointer-events-none"
+      style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.04) 0%, transparent 65%)' }} />
+
+    <div className="max-w-6xl mx-auto px-6 relative z-10">
+
+      {/* ── Header ── */}
+      <motion.div
+        className="text-center mb-14"
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.6 }}
+      >
+        <p className="font-pixel text-[9px] text-cyan-400 tracking-[0.3em] uppercase mb-4">
+          &gt; character_stats_
+        </p>
+        <h2 className="font-pixel text-2xl md:text-3xl text-white mb-3">SKILL TREE</h2>
+        <div className="h-px max-w-xs mx-auto bg-gradient-to-r from-transparent via-cyan-500/60 to-transparent mb-4" />
+        {/* Legend */}
+        <div className="flex items-center justify-center gap-6 flex-wrap">
+          {[{ label: 'SSS', color: 'text-yellow-300', sub: '90+' }, { label: 'S', color: 'text-cyan-300', sub: '80–89' }, { label: 'A', color: 'text-green-300', sub: '70–79' }, { label: 'B', color: 'text-white/40', sub: '<70' }].map(r => (
+            <div key={r.label} className="flex items-center gap-1.5">
+              <span className={`font-pixel text-[9px] ${r.color}`}>[{r.label}]</span>
+              <span className="text-white/25 text-[8px] font-mono">{r.sub}</span>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* ── Group cards ── */}
+      <div className="grid md:grid-cols-3 gap-6">
+        {groups.map((g, gi) => {
+          const groupSkills = skills[g.key] || [];
+          return (
             <motion.div
-              key={groupIndex}
+              key={g.key}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: groupIndex * 0.15 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: gi * 0.12 }}
+              className={`relative border ${g.border} rounded-2xl overflow-hidden shadow-xl ${g.glow}`}
+              style={{ background: 'rgba(5,5,20,0.8)' }}
             >
-              <div className="mb-6 flex items-center gap-3">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: "spring", stiffness: 200, delay: groupIndex * 0.15 + 0.2 }}
-                  className="w-11 h-11 rounded-xl bg-gray-900 flex items-center justify-center"
-                >
-                  <div className="text-white">{group.icon}</div>
-                </motion.div>
-                <h3 className="text-xl font-bold text-gray-900">{group.title}</h3>
+              {/* Top accent bar */}
+              <div className="h-1" style={{ background: `linear-gradient(to right, ${g.barFrom}, transparent)` }} />
+
+              {/* Card header */}
+              <div className={`px-5 pt-5 pb-4 border-b border-white/5`}>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className={`${g.labelColor}`}>{g.icon}</div>
+                  <div>
+                    <p className={`font-pixel text-[10px] ${g.labelColor}`}>{g.title}</p>
+                    <p className="text-white/25 text-[7px] font-pixel tracking-widest">{g.class} CLASS</p>
+                  </div>
+                  <div className="ml-auto text-right">
+                    <p className="text-white/25 text-[7px] font-pixel">{groupSkills.length} SKILLS</p>
+                  </div>
+                </div>
+
+                {/* Party total XP bar */}
+                <div className="mt-3">
+                  {(() => {
+                    const avg = Math.round(groupSkills.reduce((acc, s) => acc + getXP(s.name, s.level), 0) / groupSkills.length);
+                    return (
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/25 text-[7px] font-pixel w-16">AVG LV.{avg}</span>
+                        <div className="flex-1 h-2 bg-black/40 border border-white/8 overflow-hidden">
+                          <motion.div
+                            className="h-full"
+                            style={{ background: `linear-gradient(to right, ${g.barFrom}, ${g.barTo})`, opacity: 0.5 }}
+                            initial={{ width: '0%' }}
+                            whileInView={{ width: `${avg}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: gi * 0.15 }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
               </div>
 
-              <div className="flex flex-col gap-2.5">
-                {group.skills.map((skill, index) => (
-                  <SkillPill
-                    key={index}
+              {/* Skills list */}
+              <div className="px-5 pt-4 pb-5">
+                {groupSkills.map((skill, si) => (
+                  <SkillRow
+                    key={si}
                     skill={skill}
-                    delay={groupIndex * 0.1 + index * 0.04}
+                    barFrom={g.barFrom}
+                    barTo={g.barTo}
+                    labelColor={g.labelColor}
+                    groupIdx={gi}
+                    skillIdx={si}
                   />
                 ))}
               </div>
             </motion.div>
-          ))}
-        </div>
+          );
+        })}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Skills;
