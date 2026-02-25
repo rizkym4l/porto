@@ -4,134 +4,125 @@ import { Code2, Server, Database, Target } from 'lucide-react';
 import foto from '../assets/me/aku.jpeg';
 
 const expertise = [
-  { icon: <Code2 size={13} />, label: "Frontend Engineering",   sub: "React · Vue · Next.js · TypeScript",  color: "text-cyan-400",   border: "border-cyan-500/30",   bg: "bg-cyan-500/10"   },
-  { icon: <Server size={13} />, label: "Backend System",        sub: "NestJS · Express · Laravel · REST API", color: "text-purple-400", border: "border-purple-500/30", bg: "bg-purple-500/10" },
-  { icon: <Database size={13} />, label: "Database & Security", sub: "PostgreSQL · MongoDB · MySQL · Docker",  color: "text-green-400",  border: "border-green-500/30",  bg: "bg-green-500/10"  },
+  { icon: <Code2 size={13} />, label: "Frontend Engineering",   sub: "React · Vue · Next.js · TypeScript",   color: "text-indigo-600", border: "border-indigo-200", bg: "bg-indigo-50"  },
+  { icon: <Server size={13} />, label: "Backend System",        sub: "NestJS · Express · Laravel · REST API", color: "text-violet-600", border: "border-violet-200", bg: "bg-violet-50" },
+  { icon: <Database size={13} />, label: "Database & Security", sub: "PostgreSQL · MongoDB · MySQL · Docker",  color: "text-emerald-600", border: "border-emerald-200", bg: "bg-emerald-50" },
 ];
 
 const stats = [
-  { value: "1.5+", label: "Years Exp",      color: "text-cyan-400"   },
-  { value: "40%",  label: "Faster Delivery",color: "text-purple-400" },
-  { value: "BNSP", label: "Certified",      color: "text-yellow-400" },
+  { value: "1.5+", label: "Years Exp",       color: "text-indigo-600"  },
+  { value: "40%",  label: "Faster Delivery", color: "text-violet-600"  },
+  { value: "BNSP", label: "Certified",       color: "text-amber-500"   },
 ];
 
 const AboutMe = () => (
-  <section id="about" className="py-24 bg-[#050514] relative overflow-hidden">
+  <section id="about" className="py-24 bg-white relative overflow-hidden">
 
-    {/* Pixel dot grid */}
-    <div className="absolute inset-0 pointer-events-none" style={{
-      backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)',
+    {/* subtle dot pattern */}
+    <div className="absolute inset-0 pointer-events-none opacity-30" style={{
+      backgroundImage: 'radial-gradient(circle at 1px 1px, #d1d5db 1px, transparent 0)',
       backgroundSize: '28px 28px',
     }} />
 
-    {/* Glow blobs */}
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
-      style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 65%)' }} />
-    <div className="absolute bottom-0 left-0 w-96 h-96 pointer-events-none"
-      style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.04) 0%, transparent 65%)' }} />
-
     <div className="max-w-6xl mx-auto px-6 relative z-10">
 
-      {/* ── Header ── */}
+      {/* Header */}
       <motion.div
-        className="text-center mb-14"
+        className="mb-14"
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 0.6 }}
       >
-        <p className="font-pixel text-[9px] text-purple-400 tracking-[0.3em] uppercase mb-4">
-          &gt; about_me_
+        <p className="text-xs font-semibold tracking-[0.3em] text-gray-400 uppercase mb-4">
+          About Me
         </p>
-        <h2 className="font-pixel text-2xl md:text-3xl text-white mb-5">ABOUT ME</h2>
-        <div className="h-px max-w-xs mx-auto bg-gradient-to-r from-transparent via-purple-500/60 to-transparent" />
+        <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-1">
+          Who I
+        </h2>
+        <h2
+          className="text-4xl md:text-5xl font-black italic text-gray-500 leading-tight"
+          style={{ fontFamily: "'Georgia','Times New Roman',serif" }}
+        >
+          really am
+        </h2>
       </motion.div>
 
-      {/* ── Two-column layout ── */}
-      <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      {/* Two-column layout */}
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-        {/* ── LEFT: Photo ── */}
+        {/* LEFT: Photo */}
         <motion.div
           initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.7, ease: 'easeOut' }}
           className="relative"
         >
-          {/* Pixel bracket corners */}
-          <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-cyan-500/60 z-20 rounded-tl" />
-          <div className="absolute -top-3 -right-3 w-8 h-8 border-t-2 border-r-2 border-cyan-500/60 z-20 rounded-tr" />
-          <div className="absolute -bottom-3 -left-3 w-8 h-8 border-b-2 border-l-2 border-purple-500/60 z-20 rounded-bl" />
-          <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-purple-500/60 z-20 rounded-br" />
+          {/* Corner accents */}
+          <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-indigo-400 z-20 rounded-tl" />
+          <div className="absolute -top-3 -right-3 w-8 h-8 border-t-2 border-r-2 border-indigo-400 z-20 rounded-tr" />
+          <div className="absolute -bottom-3 -left-3 w-8 h-8 border-b-2 border-l-2 border-violet-400 z-20 rounded-bl" />
+          <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-violet-400 z-20 rounded-br" />
 
-          {/* Photo container — square on mobile, portrait on desktop */}
-          <div
-            className="relative overflow-hidden rounded-2xl border border-white/10 aspect-square lg:aspect-[3/4]"
-            style={{ background: 'linear-gradient(to bottom, #C2C2C2, #a8a8a8)' }}
-          >
+          {/* Photo */}
+          <div className="relative overflow-hidden rounded-2xl border border-gray-200 shadow-lg aspect-square lg:aspect-[3/4]">
             <img
               src={foto}
               alt="Rizki Maulana Arif"
               className="w-full h-full object-cover"
               style={{ objectPosition: '50% 8%' }}
             />
-            {/* Bottom fade into dark */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-              style={{ background: 'linear-gradient(to top, #050514 0%, transparent 100%)' }} />
-
-            {/* Scanlines overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-20" style={{
-              backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 1px, transparent 1px, transparent 3px)',
-            }} />
+            <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+              style={{ background: 'linear-gradient(to top, rgba(255,255,255,0.6) 0%, transparent 100%)' }} />
           </div>
 
-          {/* Floating stat badges — hidden on mobile to avoid overflow */}
+          {/* Floating stat badges */}
           {stats.map((s, i) => (
             <motion.div
               key={i}
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
-              className={`hidden lg:block absolute z-20 backdrop-blur-md border border-white/15 bg-[#050514]/90 rounded-xl px-3 py-2 text-center ${
-                i === 0 ? '-left-5 top-1/4' : i === 1 ? '-right-5 top-1/2' : '-left-4 bottom-20'
+              className={`hidden lg:block absolute z-20 bg-white border border-gray-200 shadow-md rounded-xl px-3 py-2 text-center ${
+                i === 0 ? '-left-6 top-1/4' : i === 1 ? '-right-6 top-1/2' : '-left-5 bottom-20'
               }`}
             >
-              <p className={`font-pixel text-sm ${s.color}`}>{s.value}</p>
-              <p className="text-white/40 text-[8px] font-mono mt-0.5">{s.label}</p>
+              <p className={`text-sm font-black ${s.color}`}>{s.value}</p>
+              <p className="text-gray-400 text-[8px] font-medium mt-0.5 uppercase tracking-wider">{s.label}</p>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* ── RIGHT: Content ── */}
+        {/* RIGHT: Content */}
         <motion.div
           initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
         >
-          <p className="font-pixelify text-white/40 text-sm mb-2 tracking-wider uppercase">
+          <p className="text-gray-400 text-sm mb-1 tracking-wider uppercase font-medium">
             Software Engineer
           </p>
-          <h3 className="font-pixel text-lg md:text-xl text-white mb-6 leading-snug">
-            RIZKI MAULANA ARIF
+          <h3 className="text-xl font-black text-gray-900 mb-6">
+            Rizki Maulana Arif
           </h3>
 
-          {/* Bio from CV */}
-          <p className="text-white/65 text-sm leading-relaxed mb-4">
+          <p className="text-gray-600 text-sm leading-relaxed mb-4">
             Frontend & Fullstack Developer with{' '}
-            <span className="text-cyan-400 font-medium">±1.5 years experience</span>{' '}
+            <span className="text-indigo-600 font-semibold">±1.5 years experience</span>{' '}
             in Fullstack Application Development, Frontend Engineering & UI Architecture,
             Backend Systems, and Database Management & Security Implementation.
           </p>
-          <p className="text-white/50 text-sm leading-relaxed mb-4">
+          <p className="text-gray-500 text-sm leading-relaxed mb-4">
             Contributed to enterprise-scale financial applications, accelerating feature
             delivery by up to{' '}
-            <span className="text-purple-400 font-medium">40%</span>, and designing
+            <span className="text-violet-600 font-semibold">40%</span>, and designing
             RESTful APIs. Primary expertise in the{' '}
-            <span className="text-white/75">JavaScript ecosystem</span>{' '}
+            <span className="text-gray-800 font-medium">JavaScript ecosystem</span>{' '}
             (React.js, Node.js, NestJS, Express.js) and PHP Laravel.
           </p>
-          <p className="text-white/40 text-sm leading-relaxed mb-8">
+          <p className="text-gray-400 text-sm leading-relaxed mb-8">
             Skilled in managing PostgreSQL, MongoDB & MySQL. Familiar with Docker & Git
             in Agile workflows. Holds a{' '}
-            <span className="text-yellow-400">BNSP Junior Coder Certification</span>.
+            <span className="text-amber-500 font-semibold">BNSP Junior Coder Certification</span>.
           </p>
 
           {/* Expertise cards */}
-          <div className="flex flex-col gap-3 mb-8">
+          <div className="flex flex-col gap-3 mb-7">
             {expertise.map((e, i) => (
               <motion.div
                 key={i}
@@ -141,19 +132,19 @@ const AboutMe = () => (
               >
                 <div className={`mt-0.5 ${e.color}`}>{e.icon}</div>
                 <div>
-                  <p className={`font-pixel text-[9px] ${e.color} mb-1`}>{e.label}</p>
-                  <p className="text-white/40 text-xs font-mono">{e.sub}</p>
+                  <p className={`text-xs font-semibold ${e.color} mb-0.5`}>{e.label}</p>
+                  <p className="text-gray-500 text-xs">{e.sub}</p>
                 </div>
               </motion.div>
             ))}
           </div>
 
           {/* Aspiration */}
-          <div className="flex items-center gap-2.5 p-3 rounded-xl border border-white/10 bg-white/5">
-            <Target size={14} className="text-white/30 flex-shrink-0" />
-            <p className="text-white/35 text-xs leading-relaxed">
+          <div className="flex items-center gap-2.5 p-3 rounded-xl border border-gray-200 bg-gray-50">
+            <Target size={14} className="text-gray-400 flex-shrink-0" />
+            <p className="text-gray-500 text-xs leading-relaxed">
               Aspiring to grow as a{' '}
-              <span className="text-white/60">Software Engineer · Backend · Frontend Developer</span>{' '}
+              <span className="text-gray-700 font-medium">Software Engineer · Backend · Frontend Developer</span>{' '}
               — prioritizing accuracy, time management & work ethics.
             </p>
           </div>

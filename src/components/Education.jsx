@@ -16,7 +16,7 @@ const educationData = [
     type: "university",
     active: true,
     logo: telkomLogo,
-    accent: "cyan",
+    accent: "indigo",
     description:
       "Pursuing a degree in Applied Information Systems with a focus on Smart City technologies, IoT, and modern software development.",
   },
@@ -31,46 +31,61 @@ const educationData = [
     type: "highschool",
     active: false,
     logo: smkLogo,
-    accent: "purple",
+    accent: "violet",
     description:
       "Graduated with a strong foundation in software engineering — full-stack development, database design, and agile methodologies.",
   },
 ];
 
 const accentMap = {
-  cyan:   { label: "text-cyan-400",   border: "border-cyan-500/30",   glow: "shadow-cyan-500/20",   bg: "bg-cyan-500/10",   badge: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40"   },
-  purple: { label: "text-purple-400", border: "border-purple-500/30", glow: "shadow-purple-500/20", bg: "bg-purple-500/10", badge: "bg-purple-500/20 text-purple-300 border-purple-500/40" },
+  indigo: {
+    label:   "text-indigo-600",
+    border:  "border-indigo-100",
+    bg:      "bg-indigo-50",
+    badge:   "bg-indigo-50 text-indigo-600 border-indigo-200",
+    bar:     "from-indigo-400 to-indigo-600",
+    dot:     "bg-indigo-500",
+  },
+  violet: {
+    label:   "text-violet-600",
+    border:  "border-violet-100",
+    bg:      "bg-violet-50",
+    badge:   "bg-violet-50 text-violet-600 border-violet-200",
+    bar:     "from-violet-400 to-violet-600",
+    dot:     "bg-violet-500",
+  },
 };
 
 const Education = () => (
-  <section id="education" className="py-24 bg-[#050514] relative overflow-hidden">
+  <section id="education" className="py-24 bg-[#F0F0F0] relative overflow-hidden">
 
-    {/* Pixel dot grid */}
-    <div className="absolute inset-0 pointer-events-none" style={{
-      backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)',
+    {/* subtle dot pattern */}
+    <div className="absolute inset-0 pointer-events-none opacity-30" style={{
+      backgroundImage: 'radial-gradient(circle at 1px 1px, #d1d5db 1px, transparent 0)',
       backgroundSize: '28px 28px',
     }} />
 
-    {/* Glow blob */}
-    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 pointer-events-none"
-      style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.05) 0%, transparent 70%)' }} />
-
     <div className="max-w-5xl mx-auto px-6 relative z-10">
 
-      {/* ── Header ── */}
+      {/* Header */}
       <motion.div
-        className="text-center mb-16"
+        className="mb-14"
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 0.6 }}
       >
-        <p className="font-pixel text-[9px] text-cyan-400 tracking-[0.3em] uppercase mb-4">
-          &gt; education_
+        <p className="text-xs font-semibold tracking-[0.3em] text-gray-400 uppercase mb-4">
+          Education
         </p>
-        <h2 className="font-pixel text-2xl md:text-3xl text-white mb-5">EDUCATION</h2>
-        <div className="h-px max-w-xs mx-auto bg-gradient-to-r from-transparent via-cyan-500/60 to-transparent" />
+        <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">Academic</h2>
+        <h2
+          className="text-4xl md:text-5xl font-black italic text-gray-500 leading-tight"
+          style={{ fontFamily: "'Georgia','Times New Roman',serif" }}
+        >
+          background
+        </h2>
       </motion.div>
 
-      {/* ── Cards ── */}
+      {/* Cards */}
       <div className="grid md:grid-cols-2 gap-6 md:gap-8">
         {educationData.map((edu, i) => {
           const a = accentMap[edu.accent];
@@ -82,62 +97,56 @@ const Education = () => (
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: 'easeOut' }}
               whileHover={{ y: -6, transition: { duration: 0.25 } }}
-              className={`relative bg-white/5 border ${a.border} rounded-2xl overflow-hidden backdrop-blur-sm shadow-xl ${a.glow}`}
+              className={`relative bg-white border ${a.border} rounded-2xl overflow-hidden shadow-sm`}
             >
               {/* Watermark logo */}
-              <div className="absolute -right-6 -bottom-6 w-36 h-36 opacity-[0.07] pointer-events-none">
+              <div className="absolute -right-6 -bottom-6 w-36 h-36 opacity-[0.05] pointer-events-none">
                 <img src={edu.logo} alt="" className="w-full h-full object-contain" />
               </div>
 
               {/* Top accent bar */}
-              <div className={`h-1 w-full ${edu.accent === 'cyan' ? 'bg-gradient-to-r from-cyan-500 via-cyan-400 to-transparent' : 'bg-gradient-to-r from-purple-500 via-purple-400 to-transparent'}`} />
+              <div className={`h-1 w-full bg-gradient-to-r ${a.bar} to-transparent`} />
 
               <div className="p-7">
                 {/* Logo + Institution */}
                 <div className="flex items-center gap-4 mb-6">
                   <div className={`w-16 h-16 rounded-xl ${a.bg} border ${a.border} p-2 flex items-center justify-center flex-shrink-0`}>
-                    <img
-                      src={edu.logo}
-                      alt={edu.institution}
-                      className="w-full h-full object-contain"
-                    />
+                    <img src={edu.logo} alt={edu.institution} className="w-full h-full object-contain" />
                   </div>
                   <div>
-                    <h3 className="font-pixel text-[11px] text-white leading-tight mb-1">
+                    <h3 className="font-bold text-gray-900 text-sm leading-tight mb-0.5">
                       {edu.institution}
                     </h3>
-                    <p className={`text-xs font-pixelify ${a.label}`}>{edu.location_short}</p>
+                    <p className={`text-xs font-medium ${a.label}`}>{edu.location_short}</p>
                   </div>
                 </div>
 
                 {/* Degree & Major */}
-                <p className="text-white/80 font-pixelify text-base font-semibold mb-1">
-                  {edu.degree}
-                </p>
-                <p className={`font-mono text-xs mb-5 ${a.label}`}>{edu.major}</p>
+                <p className="text-gray-800 font-semibold text-base mb-1">{edu.degree}</p>
+                <p className={`text-xs font-medium mb-5 ${a.label}`}>{edu.major}</p>
 
                 {/* Meta */}
                 <div className="flex flex-wrap gap-3 mb-5">
-                  <div className="flex items-center gap-1.5 text-white/40 text-xs">
+                  <div className="flex items-center gap-1.5 text-gray-400 text-xs">
                     <Calendar size={12} />
-                    <span className="font-mono">{edu.period}</span>
+                    <span>{edu.period}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-white/40 text-xs">
+                  <div className="flex items-center gap-1.5 text-gray-400 text-xs">
                     <MapPin size={12} />
                     <span>{edu.location}</span>
                   </div>
                 </div>
 
-                <p className="text-white/40 text-sm leading-relaxed mb-5">{edu.description}</p>
+                <p className="text-gray-500 text-sm leading-relaxed mb-5">{edu.description}</p>
 
                 {/* Status badge */}
                 {edu.active ? (
-                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border font-pixel ${a.badge}`}>
-                    <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${edu.accent === 'cyan' ? 'bg-cyan-400' : 'bg-purple-400'}`} />
+                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border font-medium ${a.badge}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${a.dot}`} />
                     Currently Enrolled
                   </div>
                 ) : (
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-white/40 font-pixel">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-gray-200 bg-gray-50 text-gray-400 font-medium">
                     Graduated
                   </div>
                 )}
@@ -147,13 +156,13 @@ const Education = () => (
         })}
       </div>
 
-      {/* Timeline connector between cards (desktop) */}
+      {/* Learning path connector */}
       <div className="hidden md:flex justify-center mt-8 items-center gap-3">
-        <div className="h-px w-24 bg-gradient-to-r from-transparent to-cyan-500/40" />
-        <div className="w-2 h-2 rounded-full bg-cyan-500/60" />
-        <div className="font-pixel text-[7px] text-white/20 tracking-widest">LEARNING PATH</div>
-        <div className="w-2 h-2 rounded-full bg-purple-500/60" />
-        <div className="h-px w-24 bg-gradient-to-l from-transparent to-purple-500/40" />
+        <div className="h-px w-24 bg-gradient-to-r from-transparent to-indigo-300" />
+        <div className="w-2 h-2 rounded-full bg-indigo-400" />
+        <p className="text-[10px] font-semibold text-gray-400 tracking-widest uppercase">Learning Path</p>
+        <div className="w-2 h-2 rounded-full bg-violet-400" />
+        <div className="h-px w-24 bg-gradient-to-l from-transparent to-violet-300" />
       </div>
     </div>
   </section>
