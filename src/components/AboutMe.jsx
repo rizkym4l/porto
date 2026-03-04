@@ -4,7 +4,7 @@ import { User, MapPin, Briefcase, Code2, Coffee, Zap } from 'lucide-react';
 
 const highlights = [
   { icon: <Code2 size={20} />, label: "Full-Stack Developer" },
-  { icon: <Briefcase size={20} />, label: "1+ Years Experience" },
+  { icon: <Briefcase size={20} />, label: "2+ Years Experience" },
   { icon: <MapPin size={20} />, label: "Bogor, Indonesia" },
   { icon: <Coffee size={20} />, label: "Problem Solver" },
 ];
