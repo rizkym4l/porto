@@ -6,7 +6,16 @@ import Eng from "../assets/certif/Eng Breaking.jpg";
 import BasicJS from "../assets/certif/Basic Javascript.jpg";
 import laravel from "../assets/certif/Laravel Zero to Hero Udemy PZN_page-0001.jpg";
 import vue from "../assets/certif/Vue Js with Wakteknologi.jpg";
+import claudeCode from "../assets/certif/certificate-ckkfrtzn6wox-1773102197 (2)_page-0001.jpg";
 export const certifications = [
+  {
+    id: 0,
+    name: "Claude Code in Action",
+    provider: "Anthropic",
+    year: "2026",
+    image: claudeCode,
+    description: "Professional certification from Anthropic covering practical usage of Claude Code — an agentic AI coding assistant. Covers AI-assisted development workflows including code generation, debugging, refactoring, codebase exploration, and integrating AI tools into modern software development processes."
+  },
   {
     id: 1,
     name: "Junior Fullstack Developer Internship",

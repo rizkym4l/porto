@@ -1,10 +1,22 @@
 export const experience = [
   {
     id: 1,
+    company: "Newgen Development",
+    position: "Contract Fullstack Developer",
+    location: "Remote, Malaysia",
+    period: "March 2026 - Present",
+    responsibilities: [
+      "Developing and maintaining full-stack web applications",
+      "Building scalable solutions using modern web technologies",
+      "Collaborating with cross-functional teams to deliver high-quality products"
+    ]
+  },
+  {
+    id: 2,
     company: "Software Fintools",
     position: "Remote Contract Frontend Developer",
     location: "Remote, Indonesia",
-    period: "June 2025 - Present",
+    period: "June 2025 - December 2025",
     responsibilities: [
       "Developed finance web platform for PT Viura Indo Tirta with high accuracy and performance",
       "Built scalable frontend using React, TypeScript, Redux Toolkit, and Ant Design",
@@ -13,7 +25,7 @@ export const experience = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     company: "Jagoscript",
     position: "Remote Contract Frontend Developer",
     location: "Remote, Indonesia",
@@ -25,7 +37,7 @@ export const experience = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     company: "PT 4NET Prima Solusi",
     position: "Contract Fullstack Developer",
     location: "Depok, Indonesia",
