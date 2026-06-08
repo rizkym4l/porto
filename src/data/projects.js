@@ -12,6 +12,7 @@ import fnc2 from "../assets/finance/dua.png";
 import fnc5 from "../assets/finance/lima.png";
 import fnc6 from "../assets/finance/enam.png";
 import fnc7 from "../assets/finance/tujuh.png";
+import financeThumb from "../assets/finance/thumbnail.png";
 
 const fncImages = [utama, fnc1, fnc2, fnc5, fnc6, fnc7];
 
@@ -24,15 +25,17 @@ import tm6 from "../assets/TM/keenam.png";
 import tm7 from "../assets/TM/ketujuh.png";
 import tm8 from "../assets/TM/kedelapan.png";
 import tm9 from "../assets/TM/kesembilan.png";
+import tmThumb from "../assets/TM/Thumbnail.png";
 
 const tmImages = [tm1, tm2, tm3, tm4, tm5, tm6, tm7, tm8, tm9];
 
-import inter1 from "../assets/inter/satu.png"
-import inter2 from "../assets/inter/dua.png"
-import inter3 from "../assets/inter/tiga.png"
-import inter4 from "../assets/inter/empat.png"
+import inter1 from "../assets/inter/satu.png";
+import inter2 from "../assets/inter/dua.png";
+import inter3 from "../assets/inter/tiga.png";
+import inter4 from "../assets/inter/empat.png";
+import interThumb from "../assets/inter/thiumnail.png";
 
-const interImg = [inter1,inter2,inter3,inter4]
+const interImg = [inter1, inter2, inter3, inter4];
 import tmAPI from "../assets/TM/as.png";
 import D from "../assets/Discover JagoScript — a digital marketplace built to empower your ideas.Sell and buy digital pr.webp";
 
@@ -42,12 +45,64 @@ import sign3 from "../assets/sign/screencapture-localhost-5173-dashboard-2026-02
 import sign4 from "../assets/sign/screencapture-localhost-5173-levels-2026-02-10-11_24_50.png";
 import sign5 from "../assets/sign/screencapture-localhost-5173-lesson-6989db3558c5be249faf8b9c-2026-02-10-11_25_09.png";
 import sign6 from "../assets/sign/screencapture-localhost-5173-profile-2026-02-10-11_25_23.png";
+import signThumb from "../assets/sign/thumnail.png";
 
 import signVideo from "../assets/sign/WhatsApp Video 2026-02-14 at 17.38.44.mp4";
 
 const signImages = [sign1, sign2, sign3, sign4, sign5, sign6];
 
+import slearnThumb from "../assets/Slearn/Thumnail.png";
+
+import polThumb from "../assets/polaries/Thumnail.png";
+import polImg1 from "../assets/polaries/image.png";
+import polImg2 from "../assets/polaries/Dua.png";
+import polImg3 from "../assets/polaries/Tiga.png";
+
+const polImages = [polImg1, polImg2, polImg3];
+
 export const projects = [
+  {
+    id: 9,
+    name: "Polareis — Marketing Platform",
+    description:
+      'Polareis is an all-in-one marketing platform — "built by marketers, for marketers" — that unifies planning, content creation, multi-platform publishing, and performance analytics in a single workspace. At Newgen Development I built the Polareis.io marketing website in Next.js: 7+ feature- and audience-segmented subpages with dynamic content sourced from Google Sheets and Figma design references.',
+    techStack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Google Sheets API",
+    ],
+    image: polImages,
+    thumbnail: polThumb,
+    github: null,
+    demo: "https://polareis.io/",
+    featured: true,
+    impact:
+      "Live marketing site for a MarTech SaaS — 7+ dynamic, audience-segmented pages",
+    type: "client",
+  },
+  {
+    id: 8,
+    name: "Slearn — Trading Journal SaaS",
+    description:
+      "Slearn is a trading journal & performance analytics SaaS for 2,500+ active traders to log trades, define strategies, enforce risk rules, and analyze performance — competing with TradeZella and TraderSync. I built RESTful APIs in NestJS for trade logging, strategy management, and analytics; developed React/TypeScript components including the dashboard, Trading Lab strategy builder, and daily summary calendar; designed MongoDB schemas for core entities; and integrated Midtrans for subscription billing.",
+    techStack: [
+      "React",
+      "TypeScript",
+      "NestJS",
+      "MongoDB",
+      "Midtrans",
+      "REST API",
+    ],
+    image: [slearnThumb],
+    thumbnail: slearnThumb,
+    github: null,
+    demo: null,
+    featured: true,
+    impact: "Trading journal & analytics SaaS serving 2,500+ active traders",
+    type: "client",
+  },
   {
     id: 7,
     name: "Sign Language Learning Platform",
@@ -62,6 +117,7 @@ export const projects = [
       "Tailwind CSS",
     ],
     image: signImages,
+    thumbnail: signThumb,
     github: null,
     demo: "https://sanssign.netlify.app/",
     featured: true,
@@ -84,9 +140,11 @@ export const projects = [
       "frontend engineering",
     ],
     image: fncImages,
+    thumbnail: financeThumb,
     github: null,
     demo: null,
-    impact: "Zero critical production issues • 50+ reusable components • ~40% faster feature delivery",
+    impact:
+      "Zero critical production issues • 50+ reusable components • ~40% faster feature delivery",
     type: "client",
   },
   {
@@ -103,6 +161,7 @@ export const projects = [
       "fullstack engineering",
     ],
     image: tmImages,
+    thumbnail: tmThumb,
     github: "https://github.com/rizkym4l/PM_fe",
     demo: "https://task-manager-rizkimaulanaarf.netlify.app/dashboard",
     impact: "Scalable team workflow management with real-time task tracking",
@@ -115,9 +174,11 @@ export const projects = [
       "Internal web application developed for PT 4net Prima Solusi (Depok) to manage employee and internal complaints. The system allows users to submit complaints online, communicate with administrators via a real-time chat feature, and track complaint resolution status to improve transparency and operational efficiency.",
     techStack: ["React", "Laravel", "MySQL", "Tailwind CSS"],
     image: interImg,
+    thumbnail: interThumb,
     github: null,
     demo: null,
-    impact: "Improved operational efficiency • Enhanced issue resolution transparency",
+    impact:
+      "Improved operational efficiency • Enhanced issue resolution transparency",
     type: "client",
   },
   {

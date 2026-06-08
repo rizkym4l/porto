@@ -20,11 +20,12 @@ export const skills = {
   ],
   tools: [
     { name: "Git & GitLab", level: "Advanced" },
+    { name: "AWS", level: "Intermediate" },
+    { name: "Docker", level: "Intermediate" },
     { name: "Agile/Scrum", level: "Intermediate" },
     { name: "Livewire", level: "Intermediate" },
     { name: "Problem Solving", level: "Advanced" },
     { name: "Team Collaboration", level: "Advanced" },
-    { name: "Docker", level: "Intermediate" },
     { name: "Time Management", level: "Advanced" }
   ]
 };

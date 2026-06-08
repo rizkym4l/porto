@@ -1,112 +1,130 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { User, MapPin, Briefcase, Code2, Coffee, Zap } from 'lucide-react';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Code2, Briefcase, MapPin, Layers } from "lucide-react";
 
 const highlights = [
-  { icon: <Code2 size={20} />, label: "Full-Stack Developer" },
-  { icon: <Briefcase size={20} />, label: "2+ Years Experience" },
-  { icon: <MapPin size={20} />, label: "Bogor, Indonesia" },
-  { icon: <Coffee size={20} />, label: "Problem Solver" },
+  { icon: Code2, label: "Fullstack Engineer" },
+  { icon: Briefcase, label: "2+ Years Experience" },
+  { icon: Layers, label: "50+ Components Shipped" },
+  { icon: MapPin, label: "Bogor, Indonesia" },
 ];
 
 const AboutMe = () => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <section id="about" className="py-20 bg-white relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `radial-gradient(circle at 1px 1px, #000 1px, transparent 0)`,
-        backgroundSize: '40px 40px'
-      }} />
-
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-            className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-2xl mb-6"
-          >
-            <User size={32} className="text-white" />
-          </motion.div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">About Me</h2>
-          <div className="w-20 h-1 bg-gray-900 mx-auto mb-4" />
-          <p className="text-gray-500 max-w-lg mx-auto">
-            Get to know me a little better
-          </p>
-        </motion.div>
-
-        <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
+    <section
+      id="about"
+      className="bg-white px-6 md:px-12 lg:px-[133px] py-20 md:py-28 lg:py-[100px]"
+    >
+      <div className="max-w-[1654px] mx-auto flex flex-col gap-14 lg:gap-20">
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16">
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+            viewport={{ once: false, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="font-dmsans font-medium text-xl sm:text-2xl md:text-[30px] leading-[1.2] text-black max-w-[900px]"
           >
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-gray-600 text-lg leading-relaxed mb-4"
-            >
-              Hi! I'm <span className="text-gray-900 font-semibold">Rizki Maulana Arif</span>, a passionate Software Developer based in Indonesia.
-              I specialize in building modern, responsive web applications using technologies like
-              <span className="text-gray-900 font-medium"> React, Vue.js, Node.js, and Laravel</span>.
-            </motion.p>
+            I build software that ships — from enterprise financial platforms
+            handling real money to payment-ready e-commerce and bilingual
+            prediction systems. Two years in and 50+ components later, I'm still
+            obsessed with turning messy problems into clean, scalable products.
+          </motion.p>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-gray-600 text-lg leading-relaxed mb-4"
-            >
-              I graduated from <span className="text-gray-900 font-medium">SMK Wikrama Bogor</span> majoring in Software Engineering,
-              and I'm currently pursuing a degree in Applied Information Systems at <span className="text-gray-900 font-medium">Telkom University Bandung</span> with a focus on Smart City technologies.
-            </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="lg:w-[487px] shrink-0 flex flex-col items-start lg:items-end gap-8"
+          >
+            <p className="font-dmsans font-light text-base md:text-lg leading-snug text-[#616161] lg:text-right">
+              Fullstack by trade, problem-solver by instinct — I live where
+              clean architecture, thoughtful UX, and systems that simply work
+              all meet.
+            </p>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-gray-600 text-lg leading-relaxed mb-8"
+            <button
+              onClick={() => setOpen((v) => !v)}
+              className="group flex items-center gap-4"
+              aria-expanded={open}
             >
-              I love turning ideas into clean, functional code and I'm always eager to learn new technologies.
-              Whether it's crafting pixel-perfect UIs or designing robust backend architectures, I enjoy every part of the development process.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4"
-            >
-              {highlights.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
-                  whileHover={{ y: -3 }}
-                  className="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-50 border border-gray-100"
-                >
-                  <div className="text-gray-900">{item.icon}</div>
-                  <span className="text-gray-600 text-sm font-medium text-center">{item.label}</span>
-                </motion.div>
-              ))}
-            </motion.div>
+              <span className="font-dmsans text-xl md:text-2xl text-black">
+                {open ? "Less about me" : "More about me"}
+              </span>
+              <span className="flex items-center justify-center size-11 rounded-full border border-neutral-300 text-black transition-all group-hover:bg-black group-hover:text-white group-hover:border-black">
+                <ArrowUpRight
+                  className={`size-5 transition-transform duration-300 ${
+                    open ? "rotate-90" : ""
+                  }`}
+                  strokeWidth={1.5}
+                />
+              </span>
+            </button>
           </motion.div>
         </div>
+
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
+              className="overflow-hidden"
+            >
+              <div className="border-t border-neutral-200 pt-12 grid lg:grid-cols-2 gap-10 lg:gap-16">
+                <div className="space-y-5 text-neutral-600 text-base md:text-lg leading-relaxed font-inter">
+                  <p>
+                    Hi! I'm{" "}
+                    <span className="text-black font-semibold">
+                      Rizki Maulana Arif
+                    </span>
+                    , a Fullstack Engineer based in Bogor, Indonesia with 2+
+                    years of hands-on experience shipping production software
+                    with{" "}
+                    <span className="text-black font-medium">
+                      React, TypeScript, Next.js, and NestJS
+                    </span>
+                    .
+                  </p>
+                  <p>
+                    I've delivered enterprise-scale financial platforms,
+                    marketing sites, headless e-commerce with{" "}
+                    <span className="text-black font-medium">
+                      Stripe &amp; Midtrans
+                    </span>{" "}
+                    payments, and bilingual prediction platforms — frequently as
+                    the solo developer taking a product from Figma to deploy.
+                  </p>
+                  <p>
+                    A Software Engineering graduate of{" "}
+                    <span className="text-black font-medium">
+                      SMK Wikrama Bogor
+                    </span>{" "}
+                    (GPA 3.35), I care about clean architecture, reusable
+                    components, and shipping MVPs fast without cutting corners.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 self-start">
+                  {highlights.map(({ icon: Icon, label }) => (
+                    <div
+                      key={label}
+                      className="flex flex-col items-start gap-3 p-5 rounded-2xl border border-neutral-200 bg-neutral-50"
+                    >
+                      <Icon className="size-6 text-black" strokeWidth={1.5} />
+                      <span className="text-neutral-700 text-sm font-medium font-inter">
+                        {label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

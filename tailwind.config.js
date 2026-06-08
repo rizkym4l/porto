@@ -8,7 +8,11 @@ module.exports = {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: ['IBM Plex Sans', 'sans-serif'],
+  			sans: ['Inter', 'IBM Plex Sans', 'sans-serif'],
+  			inter: ['Inter', 'sans-serif'],
+  			display: ['Inter', 'sans-serif'],
+  			dmsans: ['"DM Sans"', 'sans-serif'],
+  			plexmono: ['"IBM Plex Mono"', 'monospace'],
   			mono: ['Roboto Mono', 'monospace']
   		},
   		borderRadius: {

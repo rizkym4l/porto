@@ -1,41 +1,39 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import NavDock from "./components/NavDock";
 import Hero from "./components/Hero";
 import AboutMe from "./components/AboutMe";
-import Education from "./components/Education";
-import Skills from "./components/Skills";
-import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import Education from "./components/Education";
+import Experience from "./components/Experience";
 import Certifications from "./components/Certifications";
+import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 function App() {
   useEffect(() => {
-    // Enhanced smooth scroll behavior
     document.documentElement.style.scrollBehavior = "smooth";
-
-    // Optional: Add custom scroll padding to account for navbar height
-    document.documentElement.style.scrollPaddingTop = "80px";
-
+    document.documentElement.style.scrollPaddingTop = "40px";
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
     };
   }, []);
 
   return (
-    <div className="App">
-      <Navbar />
+    <div className="App bg-white">
       <Hero />
       <AboutMe />
-      <Education />
-      <Skills />
-      <Experience />
       <Projects />
+      <Skills />
+      <Education />
+      <Experience />
       <Certifications />
+      <Testimonials />
       <Contact />
       <Footer />
+      <NavDock />
     </div>
   );
 }

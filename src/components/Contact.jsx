@@ -1,109 +1,88 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Mail, MessageSquare } from 'lucide-react';
-import handshakeImg from '../assets/lets/dreamina-2026-02-16-3185-Close-up of two hands shaking firmly, si....jpeg';
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+
+const EMAIL = "rizkymaulana.more@gmail.com";
+const PHONE_DISPLAY = "+62 813-8508-8095";
+const PHONE_RAW = "+6281385088095";
+const LINKEDIN = "https://www.linkedin.com/in/rizki-maulana-arif-b711521a7/";
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-20 bg-gray-50 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `radial-gradient(circle at 1px 1px, #000 1px, transparent 0)`,
-        backgroundSize: '32px 32px'
-      }} />
-
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
+    <section
+      id="contact"
+      className="bg-white px-6 md:px-12 lg:px-[133px] py-20 md:py-24"
+    >
+      <div className="max-w-[1654px] mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
           >
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-2xl mb-6"
-            >
-              <MessageSquare size={32} className="text-white" />
-            </motion.div>
-            <motion.h2
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="text-4xl md:text-5xl font-bold mb-4 text-gray-900"
-            >
-              Let's Work Together
-            </motion.h2>
-            <div className="w-20 h-1 bg-gray-900 mx-auto mb-6" />
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="text-gray-500 text-lg max-w-2xl mx-auto"
-            >
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.45, duration: 0.5 }}
-            className="mb-10"
-          >
-            <img
-              src={handshakeImg}
-              alt="Let's work together"
-              className="w-48 h-48 mx-auto rounded-full object-cover shadow-lg border-4 border-white"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <button
-              onClick={() => window.location.href = 'mailto:Rizkymaulana.more@gmail.com'}
-              className="flex items-center justify-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-xl text-base font-medium hover:bg-gray-800 transition-colors shadow-sm"
-            >
-              <Mail size={20} />
-              Send Email
-            </button>
-            <button
-              onClick={() => window.open('https://www.linkedin.com/in/rizki-maulana-arif-b711521a7/', '_blank')}
-              className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-xl text-base font-medium border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm"
-            >
-              Connect on LinkedIn
-            </button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="mt-12 pt-8 border-t border-gray-200"
-          >
-            <p className="text-gray-400 text-sm">
-              <span className="font-mono">Rizkymaulana.more@gmail.com</span>
+            <p className="font-plexmono text-sm md:text-base text-black mb-3">
+              That's all for now.
             </p>
+            <h2 className="font-inter text-black leading-[1.08] text-[clamp(1.9rem,5vw,3.25rem)]">
+              Got a project in mind?
+              <br />
+              Let's talk
+            </h2>
           </motion.div>
-        </motion.div>
+
+          <motion.a
+            href={`mailto:${EMAIL}`}
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, type: "spring", stiffness: 160 }}
+            whileHover={{ scale: 1.05 }}
+            className="group shrink-0 self-start lg:self-auto flex items-center justify-center size-36 md:size-52 rounded-full bg-indigo-600 text-white relative overflow-hidden"
+          >
+            <span className="font-inter text-base md:text-xl">Get in touch</span>
+            <ArrowUpRight
+              className="absolute top-5 right-5 size-5 md:size-7 opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all"
+              strokeWidth={1.5}
+            />
+          </motion.a>
+        </div>
+
+        <div className="h-px w-full bg-neutral-300 my-10 md:my-14" />
+
+        <div className="flex flex-wrap gap-x-14 gap-y-8">
+          <div>
+            <p className="text-[#7e7e7e] text-sm md:text-base mb-1.5">Email</p>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="font-inter text-lg md:text-xl text-black hover:text-indigo-600 transition-colors break-all"
+            >
+              {EMAIL}
+            </a>
+          </div>
+          <div>
+            <p className="text-[#7e7e7e] text-sm md:text-base mb-1.5">Phone</p>
+            <a
+              href={`tel:${PHONE_RAW}`}
+              className="font-inter text-lg md:text-xl text-black hover:text-indigo-600 transition-colors"
+            >
+              {PHONE_DISPLAY}
+            </a>
+          </div>
+          <div>
+            <p className="text-[#7e7e7e] text-sm md:text-base mb-1.5">
+              LinkedIn
+            </p>
+            <a
+              href={LINKEDIN}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-inter text-lg md:text-xl text-black hover:text-indigo-600 transition-colors"
+            >
+              /rizki-maulana-arif
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
