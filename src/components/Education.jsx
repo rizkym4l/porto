@@ -2,17 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const educationData = [
-  {
-    id: 1,
-    institution: "Telkom University Bandung",
-    degree: "Bachelor of Applied Information Systems",
-    major: "Smart City",
-    period: "2025 — 2029",
-    location: "Bandung, Indonesia",
-    current: true,
-    description:
-      "Currently pursuing a degree in Applied Information Systems with a focus on Smart City technologies, IoT, and modern software development.",
-  },
+
   {
     id: 2,
     institution: "SMK Wikrama Bogor",

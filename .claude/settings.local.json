@@ -7,7 +7,11 @@
       "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" log --oneline -5)",
       "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" diff src/data/skills.js)",
       "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" diff HEAD src/data/skills.js)",
-      "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" add src/components/AboutMe.jsx src/App.js src/components/Navbar.jsx)"
+      "Bash(git -C \"c:\\\\Porto\\\\Portofolio\\\\frontend\" add src/components/AboutMe.jsx src/App.js src/components/Navbar.jsx)",
+      "mcp__plugin_figma_figma__get_design_context",
+      "Bash(git add *)",
+      "Bash(git reset *)",
+      "Bash(git commit -m 'Redesign portfolio with editorial Figma layout + CV-based content' -m '- New editorial sections: hero \\(Software Engineer + portrait\\), About, Impressive Works grid with detail modal, black Skills masonry via react-icons, restyled Education/Experience/Certifications, Testimonials, Contact \\(with phone\\), big-name Footer, vertical left nav dock. *)"
     ]
   }
 }
