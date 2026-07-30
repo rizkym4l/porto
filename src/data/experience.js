@@ -1,5 +1,18 @@
 export const experience = [
   {
+    id: 0,
+    company: "Stride",
+    position: "Fullstack Engineer",
+    location: "Remote, Singapore",
+    period: "March 2026 - Present",
+    responsibilities: [
+      "Work directly with the Founder and COO to design and build core features for an AI-powered CRM platform, turning product requirements into scalable technical solutions",
+      "Own end-to-end feature development across the stack — React/Next.js frontend, Node.js backend services, RESTful API integration, PostgreSQL schema design, and system architecture",
+      "Design and optimize database schemas, business workflows, and application architecture for scalability, maintainability, and platform performance",
+      "Build and integrate AI features and automation workflows to extend CRM functionality and user experience",
+    ],
+  },
+  {
     id: 1,
     company: "Newgen Development",
     position: "Fullstack Engineer",
