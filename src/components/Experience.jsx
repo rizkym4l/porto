@@ -1,6 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
+import SG from "country-flag-icons/react/3x2/SG";
+import MY from "country-flag-icons/react/3x2/MY";
+import ID from "country-flag-icons/react/3x2/ID";
 import { experience } from "../data/experience";
+
+const FLAGS = { SG, MY, ID };
+
+const Flag = ({ code, className = "" }) => {
+  const Svg = FLAGS[code];
+  if (!Svg) return null;
+  return (
+    <Svg
+      title={code}
+      className={`inline-block w-5 h-[13px] rounded-[2px] ring-1 ring-black/10 align-[-1px] shrink-0 ${className}`}
+    />
+  );
+};
 
 const abroad = experience.filter((e) => e.country && e.country !== "Indonesia");
 
@@ -36,9 +52,8 @@ const Experience = () => {
             {abroad.map((e, i) => (
               <React.Fragment key={e.id}>
                 {i > 0 && (i === abroad.length - 1 ? " & " : ", ")}
-                <span className="text-black font-medium">
-                  {e.flag} {e.country}
-                </span>
+                <Flag code={e.code} className="mr-1.5" />
+                <span className="text-black font-medium">{e.country}</span>
               </React.Fragment>
             ))}
             .
@@ -60,22 +75,11 @@ const Experience = () => {
                 <p className="mt-1 text-neutral-400">{exp.location}</p>
               </div>
               <div className="md:col-span-9">
-                <div className="flex flex-wrap items-center gap-2.5">
-                  <h3 className="font-inter text-lg md:text-2xl text-black">
-                    {exp.position}
-                  </h3>
-                  {exp.current && (
-                    <span className="flex items-center gap-1.5 font-plexmono text-[11px] uppercase tracking-wider text-neutral-500">
-                      <span className="relative flex size-1.5">
-                        <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-                        <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
-                      </span>
-                      Now
-                    </span>
-                  )}
-                </div>
-                <p className="mt-1 text-neutral-700 font-medium">
-                  {exp.flag && <span className="mr-1.5">{exp.flag}</span>}
+                <h3 className="font-inter text-lg md:text-2xl text-black">
+                  {exp.position}
+                </h3>
+                <p className="mt-1 flex items-center gap-2 text-neutral-700 font-medium">
+                  <Flag code={exp.code} />
                   {exp.company}
                 </p>
                 <ul className="mt-4 space-y-2 max-w-2xl">

@@ -5,8 +5,7 @@ export const experience = [
     position: "Fullstack Engineer",
     location: "Remote, Singapore",
     country: "Singapore",
-    flag: "🇸🇬",
-    current: true,
+    code: "SG",
     period: "March 2026 - Present",
     responsibilities: [
       "Work directly with the Founder and COO to design and build core features for an AI-powered CRM platform, turning product requirements into scalable technical solutions",
@@ -21,8 +20,7 @@ export const experience = [
     position: "Fullstack Engineer",
     location: "Remote, Malaysia",
     country: "Malaysia",
-    flag: "🇲🇾",
-    current: true,
+    code: "MY",
     period: "March 2026 - Present",
     responsibilities: [
       "Built the Polareis.io marketing website in Next.js — 7+ feature & audience-segmented subpages with dynamic content sourced from Google Sheets and Figma references",
@@ -36,7 +34,7 @@ export const experience = [
     position: "Frontend Developer",
     location: "Remote, Indonesia",
     country: "Indonesia",
-    flag: "🇮🇩",
+    code: "ID",
     period: "June 2025 - February 2026",
     responsibilities: [
       "Delivered a 9-month enterprise financial web application for PT Viura Indo Tirta at 100% scope completion, on spec and on time",
@@ -50,7 +48,7 @@ export const experience = [
     position: "Frontend Developer",
     location: "Remote, Indonesia",
     country: "Indonesia",
-    flag: "🇮🇩",
+    code: "ID",
     period: "January 2025 - June 2025",
     responsibilities: [
       "Built responsive, mobile-first interfaces for ±5 application modules using Tailwind CSS and modern CSS",
@@ -63,7 +61,7 @@ export const experience = [
     position: "Fullstack Developer",
     location: "Depok, Indonesia",
     country: "Indonesia",
-    flag: "🇮🇩",
+    code: "ID",
     period: "January 2024 - July 2024",
     responsibilities: [
       "Built a full-stack clinic queue management system, improving operational efficiency through digital automation",
