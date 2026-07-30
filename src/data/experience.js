@@ -6,7 +6,6 @@ export const experience = [
     location: "Remote, Singapore",
     country: "Singapore",
     flag: "🇸🇬",
-    overseas: true,
     current: true,
     period: "March 2026 - Present",
     responsibilities: [
@@ -23,7 +22,6 @@ export const experience = [
     location: "Remote, Malaysia",
     country: "Malaysia",
     flag: "🇲🇾",
-    overseas: true,
     current: true,
     period: "March 2026 - Present",
     responsibilities: [
@@ -36,7 +34,9 @@ export const experience = [
     id: 2,
     company: "Software Fintools",
     position: "Frontend Developer",
-    location: "Remote",
+    location: "Remote, Indonesia",
+    country: "Indonesia",
+    flag: "🇮🇩",
     period: "June 2025 - February 2026",
     responsibilities: [
       "Delivered a 9-month enterprise financial web application for PT Viura Indo Tirta at 100% scope completion, on spec and on time",
@@ -49,6 +49,8 @@ export const experience = [
     company: "PT Jagoscript Inovasi Digital",
     position: "Frontend Developer",
     location: "Remote, Indonesia",
+    country: "Indonesia",
+    flag: "🇮🇩",
     period: "January 2025 - June 2025",
     responsibilities: [
       "Built responsive, mobile-first interfaces for ±5 application modules using Tailwind CSS and modern CSS",
@@ -60,6 +62,8 @@ export const experience = [
     company: "PT 4NET Prima Solusi",
     position: "Fullstack Developer",
     location: "Depok, Indonesia",
+    country: "Indonesia",
+    flag: "🇮🇩",
     period: "January 2024 - July 2024",
     responsibilities: [
       "Built a full-stack clinic queue management system, improving operational efficiency through digital automation",
