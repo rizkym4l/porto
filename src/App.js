@@ -25,10 +25,10 @@ function App() {
     <div className="App bg-white">
       <Hero />
       <AboutMe />
-      <Projects />
+      <Experience />
       <Skills />
       <Education />
-      <Experience />
+      <Projects />
       <Certifications />
       <Testimonials />
       <Contact />

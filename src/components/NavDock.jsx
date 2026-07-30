@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Home, User, LayoutGrid, Boxes, Award, Mail, Github, Linkedin } from "lucide-react";
+import {
+  Home,
+  User,
+  Briefcase,
+  LayoutGrid,
+  Boxes,
+  Award,
+  Mail,
+  Github,
+  Linkedin,
+} from "lucide-react";
 
 const SCAN_IDS = [
   "home",
   "about",
-  "projects",
+  "experience",
   "skills",
   "education",
-  "experience",
+  "projects",
   "certifications",
   "contact",
 ];
@@ -16,6 +26,7 @@ const SCAN_IDS = [
 const navItems = [
   { id: "home", label: "Home", Icon: Home },
   { id: "about", label: "About", Icon: User },
+  { id: "experience", label: "Experience", Icon: Briefcase },
   { id: "projects", label: "Projects", Icon: LayoutGrid },
   { id: "skills", label: "Skills", Icon: Boxes },
   { id: "certifications", label: "Certifications", Icon: Award },

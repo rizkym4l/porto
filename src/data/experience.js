@@ -4,6 +4,10 @@ export const experience = [
     company: "Stride",
     position: "Fullstack Engineer",
     location: "Remote, Singapore",
+    country: "Singapore",
+    flag: "🇸🇬",
+    overseas: true,
+    current: true,
     period: "March 2026 - Present",
     responsibilities: [
       "Work directly with the Founder and COO to design and build core features for an AI-powered CRM platform, turning product requirements into scalable technical solutions",
@@ -17,6 +21,10 @@ export const experience = [
     company: "Newgen Development",
     position: "Fullstack Engineer",
     location: "Remote, Malaysia",
+    country: "Malaysia",
+    flag: "🇲🇾",
+    overseas: true,
+    current: true,
     period: "March 2026 - Present",
     responsibilities: [
       "Built the Polareis.io marketing website in Next.js — 7+ feature & audience-segmented subpages with dynamic content sourced from Google Sheets and Figma references",
